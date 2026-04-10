@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova-Cinema | Club de Cine Independiente</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-subtitle">Club de Cine Independiente</p>
+      <h1>Nova-Cinema</h1>
+      <p class="hero-text">
+        Descubre películas inolvidables, explora reseñas y comparte tu opinión en una experiencia con estilo cinematográfico.
+      </p>
+      <a href="#catalogo" class="hero-button">Ver catálogo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <div class="container">
+        <h2>Buscar películas</h2>
+        <p>Escribe el nombre o la categoría de una película.</p>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar por nombre o categoría..."
+        >
+      </div>
+    </section>
+
+    <section id="catalogo" class="catalog-section">
+      <div class="container">
+        <h2>Catálogo de películas</h2>
+
+        <div class="movies-grid" id="moviesGrid">
+
+          <article class="movie-card" data-title="El Caballero de la Noche" data-genre="Acción">
+            <img src="assets/images/movie1.jpg" alt="Póster de El Caballero de la Noche">
+            <div class="movie-info">
+              <h3>El Caballero de la Noche</h3>
+              <p class="genre">Acción</p>
+              <p>
+                Una película intensa y oscura del universo de Batman, reconocida por su historia, actuaciones y ambiente cinematográfico.
+              </p>
+            </div>
+          </article>
+
+          <article class="movie-card" data-title="City of God" data-genre="Drama">
+            <img src="assets/images/movie2.jpg" alt="Póster de City of God">
+            <div class="movie-info">
+              <h3>City of God</h3>
+              <p class="genre">Drama</p>
+              <p>
+                Una obra impactante que muestra la vida en las favelas de Brasil con una narrativa fuerte y muy recordada.
+              </p>
+            </div>
+          </article>
+
+          <article class="movie-card" data-title="Avengers" data-genre="Acción">
+            <img src="assets/images/movie3.jpg" alt="Póster de Avengers">
+            <div class="movie-info">
+              <h3>Avengers</h3>
+              <p class="genre">Acción</p>
+              <p>
+                Una producción épica donde varios superhéroes se unen para enfrentar una gran amenaza y salvar al mundo.
+              </p>
+            </div>
+          </article>
+
+          <article class="movie-card" data-title="Peaky Blinders" data-genre="Drama">
+            <img src="assets/images/movie4.jpg" alt="Póster de Peaky Blinders">
+            <div class="movie-info">
+              <h3>Peaky Blinders</h3>
+              <p class="genre">Drama</p>
+              <p>
+                Una historia de crimen, poder y elegancia visual que destaca por su ambientación oscura y estilo único.
+              </p>
+            </div>
+          </article>
+
+          <article class="movie-card" data-title="Coach Carter" data-genre="Deporte">
+            <img src="assets/images/movie5.jpg" alt="Póster de Coach Carter">
+            <div class="movie-info">
+              <h3>Coach Carter</h3>
+              <p class="genre">Deporte</p>
+              <p>
+                Una película inspiradora sobre disciplina, educación y baloncesto, basada en hechos reales.
+              </p>
+            </div>
+          </article>
+
+          <article class="movie-card" data-title="Dragon Ball Super Broly" data-genre="Anime">
+            <img src="assets/images/movie6.jpg" alt="Póster de Dragon Ball Super Broly">
+            <div class="movie-info">
+              <h3>Dragon Ball Super: Broly</h3>
+              <p class="genre">Anime</p>
+              <p>
+                Una batalla épica llena de energía, acción y animación impresionante que enfrenta a los Saiyajin más poderosos.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <p id="noResults" class="no-results">No se encontraron películas con ese criterio.</p>
+      </div>
+    </section>
+
+    <section class="review-section">
+      <div class="container review-container">
+        <div class="review-form-box">
+          <h2>Publicar una crítica</h2>
+
+          <form id="reviewForm" class="review-form">
+            <div class="form-group">
+              <label for="userName">Nombre</label>
+              <input type="text" id="userName" placeholder="Escribe tu nombre">
+            </div>
+
+            <div class="form-group">
+              <label for="movieSelect">Película</label>
+              <select id="movieSelect">
+                <option value="">Selecciona una película</option>
+                <option value="El Caballero de la Noche">El Caballero de la Noche</option>
+                <option value="City of God">City of God</option>
+                <option value="Avengers">Avengers</option>
+                <option value="Peaky Blinders">Peaky Blinders</option>
+                <option value="Coach Carter">Coach Carter</option>
+                <option value="Dragon Ball Super: Broly">Dragon Ball Super: Broly</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Calificación</label>
+              <div class="stars" id="starRating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+              </div>
+              <small id="ratingText">Selecciona una calificación</small>
+            </div>
+
+            <div class="form-group">
+              <label for="commentText">Comentario</label>
+              <textarea id="commentText" rows="5" placeholder="Escribe tu opinión sobre una película..."></textarea>
+            </div>
+
+            <button type="submit" class="publish-btn">Publicar crítica</button>
+            <p id="message" class="message"></p>
+          </form>
+        </div>
+
+        <div class="comments-box">
+          <h3>Opiniones publicadas</h3>
+          <div id="commentsList">
+            <p class="empty-comment">Todavía no hay comentarios publicados.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Nova-Cinema. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
