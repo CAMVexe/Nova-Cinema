@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/nova-foro.css">
+    <title>Nova-Foro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Girassol&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="reviews-section">
+        <h1>Bienvenido al Nova-Foro!</h1>
+        <p>Si ya tuviste la experiencia del cine Vintage con nosotros este es tu lugar para compartir con otros cinefilos.</p>
+        <p>Te invitamos a dejar reseñas sobre las peliculas que ya viste!</p>
+    <div class="reviews-wrapper">
+    <div class="reviews-form-group">
+                <label for="userNameReview">Nombre</label>
+                <input class="reviews-form-group" type="text" id="userNameReview" placeholder="Escribe tu nombre">
+            </div>
+
+            <div class="reviews-form-group">
+                <label for="movieSelect">Película</label>
+                <select id="movieSelect">
+                <option value="">Selecciona una película</option>
+                <option value="El Caballero de la Noche">El Caballero de la Noche</option>
+                <option value="City of God">City of God</option>
+                <option value="Avengers">Avengers</option>
+                <option value="Peaky Blinders">Peaky Blinders</option>
+                <option value="Coach Carter">Coach Carter</option>
+                <option value="Dragon Ball Super: Broly">Dragon Ball Super: Broly</option>
+                </select>
+            </div>
+
+            <div class="reviews-form-group">
+                <label>Calificación</label>
+                <div class="stars" id="starRating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+                </div>
+                <small id="ratingText">Selecciona una calificación</small>
+            </div>
+
+            <div class="reviews-form-group">
+                <label for="commentText">Comentario</label>
+                <textarea id="commentText" rows="5" placeholder="Escribe tu opinión sobre una película..."></textarea>
+            </div>
+
+            <button type="submit" class="publish-btn">Publicar crítica</button>
+            <p id="message" class="message"></p>
+            </form>
+        </div>
+
+        <div class="comments-box">
+            <h3>Opiniones publicadas</h3>
+            <div id="commentsList">
+            <p class="empty-comment">Todavía no hay comentarios publicados.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,141 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Girassol", serif;
+    background-color: #571f1f;
+}
+
+.reviews-section{
+    padding: 100px 10%;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(../assets/images/fondo-patron-decorativo.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviews-section h1{
+    color: white;
+    font-size: 40px;
+}
+
+.reviews-section p{
+    color: white;
+    font-size: 20px;
+}
+
+
+.reviews-wrapper{
+    width: 100%;
+    max-width: 900px;
+    background: linear-gradient(135deg, #7a1c1c, #571f1f);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.reviews-form-group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.reviews-form-group label{
+    margin-bottom: 5px;
+    color: #f5ebd2;
+    font-weight: 600;
+}
+
+
+.reviews-form-group input, .reviews-form-group select{
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #f5ebd2;
+    color: #3d2b1f;
+    font-family: "Girassol", serif;
+}
+
+
+.reviews-form-group textarea{
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: #f5ebd2;
+    color: #3d2b1f;
+    font-family: "Girassol", serif;
+    resize: none;
+}
+
+#ratingText{
+    color: #f5ebd2;
+    font-size: 14px;
+}
+
+.publish-btn{
+    margin-top: 15px;
+    align-self: center;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 12px;
+    background: #91140f;
+    color: #fff;
+    font-family: "Girassol", serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.publish-btn:hover{
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.message{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.comments-box{
+    width: 100%;
+    max-width: 900px;
+    margin-top: 40px;
+    background: linear-gradient(rgba(245, 235, 210, 0.7), rgba(245, 235, 210, 0.7)), url(../assets/images/tarjetas-bg.jpg);
+    background-size: cover;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.comments-box h3{
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+
+/* Esto es para saber como se va a ver cada comentario */
+.comment-item{
+    background: #fff8e7;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    color: #3d2b1f;
+}
+
+.empty-comment{
+    text-align: center;
+    color: #000000;
+    font-style: italic;
+}
