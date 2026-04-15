@@ -27,13 +27,28 @@ searchInput.addEventListener("input", () => {
     noResults.style.display = "none";
   }
 });
-
-// Formulario de reserva de tickets 
-// Obtener lo ingresado del formulario
 const form = document.getElementById("ticketsForm");
-const message = document.getElementById("message");
+const popup = document.getElementById("popup");
+const popupMessage = document.getElementById("popupMessage");
+const closePopup = document.getElementById("closePopup");
 
-// Validar el formulario al enviar
+let exito = false; // para saber si fue éxito o error
+
+function mostrarPopup(mensaje, esExito = false) {
+  popupMessage.textContent = mensaje;
+  popup.style.display = "flex";
+  exito = esExito;
+}
+
+function cerrarPopup() {
+  popup.style.display = "none";
+
+  // Si fue éxito, no hacer nada más
+  if (exito) {
+    exito = false;
+  }
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -42,15 +57,14 @@ form.addEventListener("submit", (e) => {
   const movie = document.getElementById("movieSelect").value;
   const seats = document.querySelector("input[type='number']").value;
   const date = document.getElementById("fecha-funcion").value;
-// Validar que todos los campos estén completos
+
   if (name === "" || email === "" || movie === "" || seats === "" || date === "") {
-    message.textContent = "Por favor completa todos los campos";
-    message.style.color = "red";
+    mostrarPopup("Por favor completa todos los campos");
     return;
   }
 
-  message.textContent = "Reserva realizada con éxito";
-  message.style.color = "green";
-
+  mostrarPopup("Reserva realizada con éxito", true);
   form.reset();
 });
+
+closePopup.addEventListener("click", cerrarPopup);
