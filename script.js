@@ -1,70 +1,74 @@
-//bsqueda en el catálogo de películas
-const searchInput = document.getElementById("searchInput");
-const movies = document.querySelectorAll(".movie-card");
-const noResults = document.getElementById("noResults");
+// Bsqueda en el catálogo de películas
+const entradaBusqueda = document.getElementById("searchInput");
+const listaPeliculas = document.querySelectorAll(".movie-card");
+const mensajeSinResultados = document.getElementById("noResults");
 
-// Función de busqueda
-searchInput.addEventListener("input", () => {
-  const searchText = searchInput.value.toLowerCase();
-  let found = false;
-// Recorrer las películas y mostrar solo las que coincidan con el texto de busqueda
-  movies.forEach(movie => {
-    const title = movie.dataset.title.toLowerCase();
-    const genre = movie.dataset.genre.toLowerCase();
-// Verificar si el título coinciden con el texto de búsqueda
-    if (title.includes(searchText) || genre.includes(searchText)) {
-      movie.style.display = "block";
-      found = true;
+// Función de bscar
+entradaBusqueda.addEventListener("input", () => {
+  const textoBusqueda = entradaBusqueda.value.toLowerCase();
+  let coincidenciaEncontrada = false;
+
+  // Recorrer las pelís y muestra solo las que coincidan
+  listaPeliculas.forEach(pelicula => {
+    const titulo = pelicula.dataset.title.toLowerCase();
+    const genero = pelicula.dataset.genre.toLowerCase();
+
+    // Verificar coincidencias
+    if (titulo.includes(textoBusqueda) || genero.includes(textoBusqueda)) {
+      pelicula.style.display = "block";
+      coincidenciaEncontrada = true;
     } else {
-      movie.style.display = "none";
+      pelicula.style.display = "none";
     }
   });
 
   // Mostrar mensaje si no hay resultados
-  if (!found) {
-    noResults.style.display = "block";
-  } else {
-    noResults.style.display = "none";
-  }
+  mensajeSinResultados.style.display = coincidenciaEncontrada ? "none" : "block";
 });
-const form = document.getElementById("ticketsForm");
-const popup = document.getElementById("popup");
-const popupMessage = document.getElementById("popupMessage");
-const closePopup = document.getElementById("closePopup");
 
-let exito = false; // para saber si fue éxito o error
+const formularioReservas = document.getElementById("ticketsForm");
+const ventanaEmergente = document.getElementById("popup");
+const textoPopup = document.getElementById("popupMessage");
+const botonCerrarPopup = document.getElementById("closePopup");
 
-function mostrarPopup(mensaje, esExito = false) {
-  popupMessage.textContent = mensaje;
-  popup.style.display = "flex";
-  exito = esExito;
+let fueExitoso = false; // dice si fue éxito o error
+
+function mostrarVentana(mensaje, esExito = false) {
+  textoPopup.textContent = mensaje;
+  ventanaEmergente.style.display = "flex";
+  fueExitoso = esExito;
 }
 
-function cerrarPopup() {
-  popup.style.display = "none";
+function cerrarVentana() {
+  ventanaEmergente.style.display = "none";
 
-  // Si fue éxito, no hacer nada más
-  if (exito) {
-    exito = false;
+  if (fueExitoso) {
+    fueExitoso = false;
   }
 }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+formularioReservas.addEventListener("submit", (evento) => {
+  evento.preventDefault();
 
-  const name = document.getElementById("userName").value.trim();
-  const email = document.querySelector("input[type='email']").value.trim();
-  const movie = document.getElementById("movieSelect").value;
-  const seats = document.querySelector("input[type='number']").value;
-  const date = document.getElementById("fecha-funcion").value;
+  const nombreUsuario = document.getElementById("userName").value.trim();
+  const correo = document.querySelector("input[type='email']").value.trim();
+  const peliculaSeleccionada = document.getElementById("movieSelect").value;
+  const cantidadAsientos = document.querySelector("input[type='number']").value;
+  const fechaFuncion = document.getElementById("fecha-funcion").value;
 
-  if (name === "" || email === "" || movie === "" || seats === "" || date === "") {
-    mostrarPopup("Por favor completa todos los campos");
+  if (
+    nombreUsuario === "" ||
+    correo === "" ||
+    peliculaSeleccionada === "" ||
+    cantidadAsientos === "" ||
+    fechaFuncion === ""
+  ) {
+    mostrarVentana("Por favor completa todos los campos");
     return;
   }
 
-  mostrarPopup("Reserva realizada con éxito", true);
-  form.reset();
+  mostrarVentana("Reserva realizada con éxito", true);
+  formularioReservas.reset();
 });
 
-closePopup.addEventListener("click", cerrarPopup);
+botonCerrarPopup.addEventListener("click", cerrarVentana);
