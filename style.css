@@ -1,1 +1,627 @@
-/* ================= Inicio ================== */
+:root{
+    --primary-color: #571f1f;
+    --secondary-color:#c4b697;
+    --bg-color:#fff;
+    --text-color:#e4bba1;
+    --accent-color:#91140f;
+    --card-bg:#ccbea0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Girassol", serif;
+    background: var(--primary-color);
+    color: white;
+    line-height: 1.6;
+}
+
+/* NAVBAR INICIO */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;
+    background-color: var(--secondary-color);
+    box-shadow: 0 5px 10px rgb(214, 148, 136);
+    position: sticky;
+    font-size: 20px;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 30px;
+    gap: 5px;
+    color: var(--text-color);
+    transition: 0.5s;
+}
+
+.logo span{
+    color: var(--accent-color);
+}
+
+.logo:hover{
+    transform: scale(1.1);
+}
+
+.navbar-logo{
+    margin-right: 15px;
+    max-width: 100px;
+}
+
+
+.nav-links{
+    margin-left: -80px;
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li{
+    margin-left: 20px;
+}
+
+.nav-links a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: 0.4;
+}
+
+.nav-links a:hover{
+    transform: translateX(10px);
+    cursor: pointer;
+    color: var(--accent-color);
+}
+/* NAVBAR FINAL */
+
+/* HERO INICIO */
+.hero{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../assets/images/novacinema-hero.png);
+    font-size: 25px;
+    background-size: cover;
+    background-position: center;
+    color: var(--secondary-color);
+    padding: 0 30px;
+    border-bottom: 3px solid #91140f;
+}
+
+.hero-img{
+    margin-top: -25px;
+    height: 200px;
+    transition: 0.5s;
+}
+
+.hero-img:hover{
+    transform: scale(1.1);
+}
+
+.hero-content h1{
+    font-size: 3.4rem;
+    margin-bottom: 25px;
+}
+
+.hero-content h1 span{
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.hero-content p{
+    font-size: 1.7rem;
+    max-width: 600px;
+    margin: 0;
+    justify-content: center;
+}
+
+.hero-button{
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 15px 40px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s;
+    margin-top: 40px;
+}
+
+.hero-button:hover{
+    transform: translateY(10px);
+}
+/* HERO FINAL */
+
+/* CATALOGO INICIO */
+/* BUSCADOR INICIO */
+.search-section{
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.search-container{
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../assets/images/tarjetas-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    
+}
+
+.search-container h2{
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.search-container p{
+    margin-bottom: 20px;
+    color: black;
+    font-size: 20px;
+}
+
+.search-container input{
+    padding: 14px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    outline: none;
+    font-size: 20px;
+    transition: 0.2s;
+    font-family: "Girassol", serif;
+}
+
+.search-container input:focus{
+    border-color: var(--accent-color);
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+/* BUSCADOR FINAL */
+
+
+.catalog-container{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.7)), url(../assets/images/patron-cortinas.jpg);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px solid #a3792b;
+}
+.catalog-container h2{
+    text-align: center;
+    font-weight: 600;
+}
+
+.catalog-section{
+    position: relative;
+    padding: 120px 10% 80px; 
+    overflow: hidden;
+}
+
+.catalog-section::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    height: 1000px;
+    background: url(../assets/images/cortina-lados.png) no-repeat;
+    background-size: contain;
+    z-index: 2;
+}
+
+.catalog-section::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1000px;
+    height: 1000px;
+    background: url(../assets/images/cortina-lados.png) no-repeat;
+    background-size: contain;
+    transform: scaleX(-1);
+    z-index: 2;
+}
+
+/* sombra de las cortinas */
+.catalog-section::before, 
+.catalog-section::after{
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
+}
+
+/* fix para permitir interacción */
+.catalog-section::before,
+.catalog-section::after {
+    pointer-events: none;
+}
+
+/* asegurar que el buscador quede por encima */
+.search-section {
+    position: relative;
+    z-index: 3;
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: #f5ebd2;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: #3d2b1f;
+  width: 300px;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background: #91140f;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+/* GRID DE LAS PELICULAS */
+.movies-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.movie-card{
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../assets/images/tarjetas-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 30px;
+    font-size: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border-radius: 14px;
+    text-align: center;
+    transition: 0.3s;
+    color: black;
+}
+
+.movie-card:hover{
+    transform: translateY(12px);
+    cursor: pointer;
+}
+
+.movie-card h3{
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.card-image{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 70%;
+    height: 300px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    align-items: center;
+}
+/* GRID DE LAS PELICULAS */
+/* CATALOGO FINAL */
+
+/* FORMULARIO DE TICKETS INICIO */
+.tickets-section{
+    padding: 100px 10%;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(../assets/images/fondo-patron-decorativo.png);;
+}
+
+.tickets-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.tickets-info{
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(../assets/images/tarjetas-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tickets-info h2{
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.tickets-info p{
+    opacity: 0.9;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.tickets-img{
+    width: 440px;
+    margin-top: 20px;
+    animation: animacion-flotar 3s ease-in-out infinite;
+}
+
+@keyframes animacion-flotar{
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-30px);}
+    100% {transform: translateY(0px);}
+}
+
+.tickets-form-box{
+    background: #f5ebd2;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tickets-form-box h2{
+    margin-bottom: 25px;
+    color: #5a2a1a;
+}
+
+.tickets-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label{
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #3d2b1f;
+}
+
+.form-group input, .form-group select{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 18px;
+    transition: 0.2s;
+    font-family: "Girassol", serif;
+}
+
+.form-group input:focus, .form-group select:focus{
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.apartar-btn{
+    margin-top: 10px;
+    padding: 12px;
+    width: 50%;
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent-color);
+    color: #fff;
+    font-family: "Girassol", serif;
+    font-size: large;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.apartar-btn:hover{
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* FORMULARIO DE TICKETS FINAL */
+
+.footer{
+    text-align: center;
+    background: black;
+}
+
+/* RESPONSIVE */
+/* TABLETS  */
+@media (max-width: 992px){
+
+    /* NAVBAR */
+    .nav-links{
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--secondary-color);
+        flex-direction: column;
+        width: 250px;
+        padding: 20px;
+        gap: 15px;
+        display: none;
+    }
+
+    .nav-links.active{
+        display: flex;
+    }
+
+    .menu-toggle{
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .menu-toggle span{
+        width: 25px;
+        height: 3px;
+        background: var(--primary-color);
+    }
+
+    /* HERO */
+    .hero{
+        height: auto;
+        padding: 80px 20px;
+    }
+
+    .hero-content p{
+        font-size: 1.3rem;
+    }
+
+    .hero-img{
+        height: 150px;
+    }
+
+    /* GRID PELICULAS */
+    .movies-grid{
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    /* CORTINAS */
+    .catalog-section::before, .catalog-section::after{
+        width: 400px;
+        height: 600px;
+    }
+
+    /* FORMULARIO */
+    .tickets-container{
+        grid-template-columns: 1fr;
+    }
+
+    .tickets-info{
+        text-align: center;
+    }
+
+    .tickets-img{
+        width: 250px;
+    }
+
+    .apartar-btn{
+        width: 70%;
+    }
+}
+
+
+/* CELULARES */
+@media (max-width: 600px){
+
+    /* NAVBAR */
+    .navbar{
+        padding: 20px;
+    }
+
+    .logo{
+        font-size: 22px;
+    }
+
+    .navbar-logo{
+        max-width: 60px;
+    }
+
+    /* HERO */
+    .hero-content p{
+        font-size: 1.1rem;
+    }
+
+    .hero-button{
+        padding: 12px 25px;
+    }
+
+    /* BUSCADOR */
+    .search-container{
+        padding: 25px;
+    }
+
+    .search-container h2{
+        font-size: 20px;
+    }
+
+    .search-container input{
+        font-size: 16px;
+    }
+
+    /* GRID*/
+    .movies-grid{
+        margin-top: 20px;
+        grid-template-columns: 1fr;
+        padding: 1px;
+        gap: 25px;
+    }
+
+    .movie-card{
+        max-width: 500px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 30px;
+        font-size: 15px;
+    }
+
+    .card-image{
+        width: 100%;
+        height: auto;
+        max-height: 280px;
+        object-fit: cover;
+    }
+
+    .catalog-section::before, .catalog-section::after{
+        width: 200px;
+        height: 200px;
+    }
+
+    /* FORMULARIO */
+    .tickets-form-box{
+        padding: 30px;
+    }
+
+    .tickets-info{
+        padding: 40px 20px;
+    }
+
+    .tickets-info h2{
+        font-size: 28px;
+    }
+
+    .tickets-info p{
+        font-size: 18px;
+    }
+
+    .tickets-img{
+        width: 180px;
+    }
+
+    .apartar-btn{
+        width: 100%;
+    }
+
+    /* FOOTER */
+    .footer{
+        font-size: 14px;
+        padding: 15px;
+    }
+}
