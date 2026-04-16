@@ -2,9 +2,9 @@
     --primary-color: #571f1f;
     --secondary-color:#c4b697;
     --bg-color:#fff;
-    --text-color:#e4bba1;
+    --text-color:#3d2b1f;
     --accent-color:#91140f;
-    --card-bg:#ccbea0;
+    --card-bg:#c4b697;
 }
 
 *{
@@ -20,7 +20,7 @@ body{
     line-height: 1.6;
 }
 
-/* NAVBAR INICIO */
+/* NAVBAR */
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -57,7 +57,6 @@ body{
     max-width: 100px;
 }
 
-
 .nav-links{
     margin-left: -80px;
     display: flex;
@@ -72,7 +71,8 @@ body{
     text-decoration: none;
     color: var(--primary-color);
     font-weight: 600;
-    transition: 0.4;
+    /* CORRECCIÓN 1: "transition: 0.4" es inválido, faltaba la propiedad y la unidad de tiempo */
+    transition: color 0.4s;
 }
 
 .nav-links a:hover{
@@ -80,9 +80,13 @@ body{
     cursor: pointer;
     color: var(--accent-color);
 }
-/* NAVBAR FINAL */
 
-/* HERO INICIO */
+/* El botón hamburguesa está oculto en desktop por defecto */
+.menu-toggle{
+    display: none;
+}
+
+/* HERO */
 .hero{
     height: 80vh;
     display: flex;
@@ -140,13 +144,67 @@ body{
 .hero-button:hover{
     transform: translateY(10px);
 }
-/* HERO FINAL */
 
-/* CATALOGO INICIO */
-/* BUSCADOR INICIO */
+/* CATÁLOGO */
+.catalog-container{
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.7)), url(../assets/images/patron-cortinas.jpg);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px solid #a3792b;
+}
+
+.catalog-container h2{
+    text-align: center;
+    font-weight: 600;
+}
+
+.catalog-section{
+    position: relative;
+    padding: 120px 10% 80px;
+    overflow: hidden;
+}
+
+.catalog-section::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1000px;
+    height: 1000px;
+    background: url(../assets/images/cortina-lados.png) no-repeat;
+    background-size: contain;
+    z-index: 2;
+}
+
+.catalog-section::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1000px;
+    height: 1000px;
+    background: url(../assets/images/cortina-lados.png) no-repeat;
+    background-size: contain;
+    transform: scaleX(-1);
+    z-index: 2;
+}
+
+.catalog-section::before,
+.catalog-section::after{
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
+    /* CORRECCIÓN 2: Sin pointer-events: none las cortinas bloqueaban los clics
+       sobre las tarjetas de películas debajo de ellas */
+    pointer-events: none;
+}
+
+/* BUSCADOR */
 .search-section{
     padding: 80px 10%;
     text-align: center;
+    /* CORRECCIÓN 2: z-index: 3 necesario para que el buscador quede
+       por encima de los pseudo-elementos ::before y ::after (z-index: 2) */
+    position: relative;
+    z-index: 3;
 }
 
 .search-container{
@@ -158,7 +216,6 @@ body{
     padding: 40px;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    
 }
 
 .search-container h2{
@@ -188,100 +245,8 @@ body{
     border-color: var(--accent-color);
     box-shadow: 0 0 6px rgba(0,0,0,0.2);
 }
-/* BUSCADOR FINAL */
 
-
-.catalog-container{
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.7)), url(../assets/images/patron-cortinas.jpg);
-    background-size: cover;
-    background-position: center;
-    border-bottom: 5px solid #a3792b;
-}
-.catalog-container h2{
-    text-align: center;
-    font-weight: 600;
-}
-
-.catalog-section{
-    position: relative;
-    padding: 120px 10% 80px; 
-    overflow: hidden;
-}
-
-.catalog-section::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1000px;
-    height: 1000px;
-    background: url(../assets/images/cortina-lados.png) no-repeat;
-    background-size: contain;
-    z-index: 2;
-}
-
-.catalog-section::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1000px;
-    height: 1000px;
-    background: url(../assets/images/cortina-lados.png) no-repeat;
-    background-size: contain;
-    transform: scaleX(-1);
-    z-index: 2;
-}
-
-/* sombra de las cortinas */
-.catalog-section::before, 
-.catalog-section::after{
-    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
-}
-
-/* fix para permitir interacción */
-.catalog-section::before,
-.catalog-section::after {
-    pointer-events: none;
-}
-
-/* asegurar que el buscador quede por encima */
-.search-section {
-    position: relative;
-    z-index: 3;
-}
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.popup-content {
-  background: #f5ebd2;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  color: #3d2b1f;
-  width: 300px;
-}
-
-.popup-content button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  background: #91140f;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}
-/* GRID DE LAS PELICULAS */
+/* GRID DE PELÍCULAS */
 .movies-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -322,15 +287,45 @@ body{
     height: 300px;
     border-radius: 4px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    align-items: center;
 }
-/* GRID DE LAS PELICULAS */
-/* CATALOGO FINAL */
 
-/* FORMULARIO DE TICKETS INICIO */
+/* POPUP */
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-content{
+    background: #f5ebd2;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: #3d2b1f;
+    width: 300px;
+}
+
+.popup-content button{
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #91140f;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* FORMULARIO DE TICKETS */
 .tickets-section{
     padding: 100px 10%;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(../assets/images/fondo-patron-decorativo.png);;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(../assets/images/fondo-patron-decorativo.png);
 }
 
 .tickets-container{
@@ -442,18 +437,17 @@ body{
     opacity: 0.9;
 }
 
-/* FORMULARIO DE TICKETS FINAL */
-
+/* FOOTER */
 .footer{
     text-align: center;
     background: black;
 }
 
-/* RESPONSIVE */
-/* TABLETS  */
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+/* TABLETS */
 @media (max-width: 992px){
 
-    /* NAVBAR */
     .nav-links{
         position: absolute;
         top: 100%;
@@ -483,7 +477,6 @@ body{
         background: var(--primary-color);
     }
 
-    /* HERO */
     .hero{
         height: auto;
         padding: 80px 20px;
@@ -497,19 +490,16 @@ body{
         height: 150px;
     }
 
-    /* GRID PELICULAS */
     .movies-grid{
         grid-template-columns: 1fr;
         padding: 10px;
     }
 
-    /* CORTINAS */
     .catalog-section::before, .catalog-section::after{
         width: 400px;
         height: 600px;
     }
 
-    /* FORMULARIO */
     .tickets-container{
         grid-template-columns: 1fr;
     }
@@ -527,11 +517,9 @@ body{
     }
 }
 
-
 /* CELULARES */
 @media (max-width: 600px){
 
-    /* NAVBAR */
     .navbar{
         padding: 20px;
     }
@@ -544,7 +532,6 @@ body{
         max-width: 60px;
     }
 
-    /* HERO */
     .hero-content p{
         font-size: 1.1rem;
     }
@@ -553,7 +540,6 @@ body{
         padding: 12px 25px;
     }
 
-    /* BUSCADOR */
     .search-container{
         padding: 25px;
     }
@@ -566,7 +552,6 @@ body{
         font-size: 16px;
     }
 
-    /* GRID*/
     .movies-grid{
         margin-top: 20px;
         grid-template-columns: 1fr;
@@ -594,7 +579,6 @@ body{
         height: 200px;
     }
 
-    /* FORMULARIO */
     .tickets-form-box{
         padding: 30px;
     }
@@ -619,7 +603,6 @@ body{
         width: 100%;
     }
 
-    /* FOOTER */
     .footer{
         font-size: 14px;
         padding: 15px;

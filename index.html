@@ -9,180 +9,168 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Girassol&display=swap" rel="stylesheet">
-
   </head>
   <body>
     <nav class="navbar">
-          <div class="logo"><img class="navbar-logo" src="assets/images/navbarlogo.png">NOVA<span>CINEMA</span></div>
-
-          <!-- Botón Hamburguesa -->
-          <div class="menu-toggle" id="menu-toggle">
-              <span></span>
-              <span></span>
-              <span></span>
-          </div>
-          <ul class="nav-links" id="nav-links">
-              <li><a href="#">Inicio</a></li>
-              <li><a href="#">Nuevos Estrenos</a></li>
-              <li><a href="#catalogo">Catálogo</a></li>
-              <li><a href="nova-foro.html">Nova-Foro</a></li>
-              <li><a href="#" class="btn-contact">Contactanos</a></li>
-          </ul>
-      </nav>
+      <div class="logo">
+        <img class="navbar-logo" src="assets/images/navbarlogo.png">NOVA<span>CINEMA</span>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Nuevos Estrenos</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="nova-foro.html">Nova-Foro</a></li>
+        <li><a href="#" class="btn-contact">Contactanos</a></li>
+      </ul>
+    </nav>
 
     <header class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-subtitle">Club de Cine Independiente</p>
-        <div class="hero-logo"><img class="hero-img" src="assets/images/hero-logo.png" alt=""></div>
-        <p class="hero-text">
-          ¡Ven y vive tus peliculas favoritas con el estilo del cine vintage! 
-        </p>
+        <div class="hero-logo"><img class="hero-img" src="assets/images/hero-logo.png" alt="Logo Nova-Cinema"></div>
+        <p class="hero-text">¡Ven y vive tus peliculas favoritas con el estilo del cine vintage!</p>
         <p class="hero-text">Descubre películas inolvidables, explora reseñas y comparte tu opinión en una experiencia con estilo cinematográfico.</p>
         <a href="#tickets" class="hero-button">Apartar mis entradas</a>
       </div>
     </header>
 
     <main>
-      <section>
-        <div class="catalog-container">
-          <section id="catalogo" class="catalog-section">
-            <h2>Catálogo de películas</h2>
+
+      <!-- CATALOGO -->
+      <!-- CORRECCIÓN 1: Se eliminó el <section> externo sin propósito.
+           La estructura correcta es: catalog-container > catalog-section > search-section -->
+      <div class="catalog-container">
+        <section id="catalogo" class="catalog-section">
+          <h2>Catálogo de películas</h2>
+
           <section class="search-section">
-          <div class="search-container">
-            <h2>Buscar películas</h2>
-            <p>Escribe el nombre o la categoría de una película.</p>
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Buscar por nombre o categoría..."
-            >
-          </div>
-          <div class="movies-grid" id="moviesGrid">
-            <article class="movie-card" data-title="Star Wars: A New Hope" data-genre="Sci-fi">
-              <img class="card-image" src="assets/images/movie7.jpg" alt="Póster de Una Nueva Esperanza">
-              <div class="movie-info">
-                <h3>Star Wars: A New Hope</h3>
-                <p class="genre">Sci-fi</p>
-                <p>
-                  Luke Skywalker se une a la Alianza Rebelde para combatir al Imperio Galáctico tras encontrar un mensaje oculto de la Princesa Leia en el droide R2-D2.
-                </p>
-              </div>
-            </article>
+            <div class="search-container">
+              <h2>Buscar películas</h2>
+              <p>Escribe el nombre o la categoría de una película.</p>
+              <input type="text" id="searchInput" placeholder="Buscar por nombre o categoría...">
+            </div>
 
-            <article class="movie-card" data-title="Star Wars: Empire Strikes Back" data-genre="Sci-fi">
-              <img class="card-image" src="assets/images/movie8.jpg" alt="Póster de El Imperio Contrataaca">
-              <div class="movie-info">
-                <h3>Star Wars: Empire Strikes Back</h3>
-                <p class="genre">Sci-fi</p>
-                <p>
-                  Las fuerzas imperiales lideradas por Darth Vader persiguen a la Alianza Rebelde tras la destrucción de la Estrella de la Muerte
-                </p>
-              </div>
-            </article>
+            <div class="movies-grid" id="moviesGrid">
 
-            <article class="movie-card" data-title="Star Wars: Return of the Jedi" data-genre="Sci-fi">
-              <img class="card-image" src="assets/images/movie9.jpg" alt="Póster de El Retorno del Jedi">
-              <div class="movie-info">
-                <h3>Star Wars: Return of the Jedi</h3>
-                <p class="genre">Sci-fi</p>
-                <p>
-                  La conclusión de la trilogía original: Luke Skywalker rescata a Han Solo de Jabba el Hutt y se enfrenta a Darth Vader y al Emperador Palpatine para redimir a su padre y destruir la segunda Estrella de la Muerte
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="Star Wars: A New Hope" data-genre="Sci-fi">
+                <img class="card-image" src="assets/images/movie7.jpg" alt="Póster de Una Nueva Esperanza">
+                <div class="movie-info">
+                  <h3>Star Wars: A New Hope</h3>
+                  <p class="genre">Sci-fi</p>
+                  <p>Luke Skywalker se une a la Alianza Rebelde para combatir al Imperio Galáctico tras encontrar un mensaje oculto de la Princesa Leia en el droide R2-D2.</p>
+                </div>
+              </article>
 
-            <article class="movie-card" data-title="El Caballero de la Noche" data-genre="Acción">
-              <img class="card-image" src="assets/images/movie1.jpg" alt="Póster de El Caballero de la Noche">
-              <div class="movie-info">
-                <h3>El Caballero de la Noche</h3>
-                <p class="genre">Acción</p>
-                <p>
-                  Una película intensa y oscura del universo de Batman, reconocida por su historia, actuaciones y ambiente cinematográfico.
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="Star Wars: Empire Strikes Back" data-genre="Sci-fi">
+                <img class="card-image" src="assets/images/movie8.jpg" alt="Póster de El Imperio Contrataaca">
+                <div class="movie-info">
+                  <h3>Star Wars: Empire Strikes Back</h3>
+                  <p class="genre">Sci-fi</p>
+                  <p>Las fuerzas imperiales lideradas por Darth Vader persiguen a la Alianza Rebelde tras la destrucción de la Estrella de la Muerte.</p>
+                </div>
+              </article>
 
-            <article class="movie-card" data-title="City of God" data-genre="Drama">
-              <img class="card-image" src="assets/images/movie2.jpg" alt="Póster de City of God">
-              <div class="movie-info">
-                <h3>City of God</h3>
-                <p class="genre">Drama</p>
-                <p>
-                  Una obra impactante que muestra la vida en las favelas de Brasil con una narrativa fuerte y muy recordada.
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="Star Wars: Return of the Jedi" data-genre="Sci-fi">
+                <img class="card-image" src="assets/images/movie9.jpg" alt="Póster de El Retorno del Jedi">
+                <div class="movie-info">
+                  <h3>Star Wars: Return of the Jedi</h3>
+                  <p class="genre">Sci-fi</p>
+                  <p>La conclusión de la trilogía original: Luke Skywalker rescata a Han Solo de Jabba el Hutt y se enfrenta a Darth Vader y al Emperador Palpatine.</p>
+                </div>
+              </article>
 
-            <article class="movie-card" data-title="Avengers" data-genre="Acción">
-              <img class="card-image" src="assets/images/movie3.jpg" alt="Póster de Avengers">
-              <div class="movie-info">
-                <h3>Avengers</h3>
-                <p class="genre">Acción</p>
-                <p>
-                  Una producción épica donde varios superhéroes se unen para enfrentar una gran amenaza y salvar al mundo.
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="El Caballero de la Noche" data-genre="Acción">
+                <img class="card-image" src="assets/images/movie1.jpg" alt="Póster de El Caballero de la Noche">
+                <div class="movie-info">
+                  <h3>El Caballero de la Noche</h3>
+                  <p class="genre">Acción</p>
+                  <p>Una película intensa y oscura del universo de Batman, reconocida por su historia, actuaciones y ambiente cinematográfico.</p>
+                </div>
+              </article>
 
-            <article class="movie-card" data-title="Peaky Blinders" data-genre="Drama">
-              <img class="card-image" src="assets/images/movie4.jpg" alt="Póster de Peaky Blinders">
-              <div class="movie-info">
-                <h3>Peaky Blinders</h3>
-                <p class="genre">Drama</p>
-                <p>
-                  Una historia de crimen, poder y elegancia visual que destaca por su ambientación oscura y estilo único.
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="City of God" data-genre="Drama">
+                <img class="card-image" src="assets/images/movie2.jpg" alt="Póster de City of God">
+                <div class="movie-info">
+                  <h3>City of God</h3>
+                  <p class="genre">Drama</p>
+                  <p>Una obra impactante que muestra la vida en las favelas de Brasil con una narrativa fuerte y muy recordada.</p>
+                </div>
+              </article>
 
-            <article class="movie-card" data-title="Coach Carter" data-genre="Deporte">
-              <img class="card-image" src="assets/images/movie5.jpg" alt="Póster de Coach Carter">
-              <div class="movie-info">
-                <h3>Coach Carter</h3>
-                <p class="genre">Deporte</p>
-                <p>
-                  Una película inspiradora sobre disciplina, educación y baloncesto, basada en hechos reales.
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="Avengers" data-genre="Acción">
+                <img class="card-image" src="assets/images/movie3.jpg" alt="Póster de Avengers">
+                <div class="movie-info">
+                  <h3>Avengers</h3>
+                  <p class="genre">Acción</p>
+                  <p>Una producción épica donde varios superhéroes se unen para enfrentar una gran amenaza y salvar al mundo.</p>
+                </div>
+              </article>
 
-            <article class="movie-card" data-title="Dragon Ball Super Broly" data-genre="Anime">
-              <img class="card-image" src="assets/images/movie6.jpg" alt="Póster de Dragon Ball Super Broly">
-              <div class="movie-info">
-                <h3>Dragon Ball Super: Broly</h3>
-                <p class="genre">Anime</p>
-                <p>
-                  Una batalla épica llena de energía, acción y animación impresionante que enfrenta a los Saiyajin más poderosos.
-                </p>
-              </div>
-            </article>
+              <article class="movie-card" data-title="Peaky Blinders" data-genre="Drama">
+                <img class="card-image" src="assets/images/movie4.jpg" alt="Póster de Peaky Blinders">
+                <div class="movie-info">
+                  <h3>Peaky Blinders</h3>
+                  <p class="genre">Drama</p>
+                  <p>Una historia de crimen, poder y elegancia visual que destaca por su ambientación oscura y estilo único.</p>
+                </div>
+              </article>
 
-          </div>
+              <article class="movie-card" data-title="Coach Carter" data-genre="Deporte">
+                <img class="card-image" src="assets/images/movie5.jpg" alt="Póster de Coach Carter">
+                <div class="movie-info">
+                  <h3>Coach Carter</h3>
+                  <p class="genre">Deporte</p>
+                  <p>Una película inspiradora sobre disciplina, educación y baloncesto, basada en hechos reales.</p>
+                </div>
+              </article>
 
-          <p id="noResults" class="no-results">No se encontraron películas con ese criterio.</p>
-        </div>
-      </section>
+              <article class="movie-card" data-title="Dragon Ball Super Broly" data-genre="Anime">
+                <img class="card-image" src="assets/images/movie6.jpg" alt="Póster de Dragon Ball Super Broly">
+                <div class="movie-info">
+                  <h3>Dragon Ball Super: Broly</h3>
+                  <p class="genre">Anime</p>
+                  <p>Una batalla épica llena de energía, acción y animación impresionante que enfrenta a los Saiyajin más poderosos.</p>
+                </div>
+              </article>
 
+            </div>
+
+            <p id="noResults" class="no-results">No se encontraron películas con ese criterio.</p>
+
+          </section>
+          <!-- CORRECCIÓN 2: Se eliminó el </div> huérfano que estaba aquí -->
+
+        </section>
+      </div>
+      <!-- CORRECCIÓN 3: Se añadió este </div> para cerrar catalog-container -->
+
+      <!-- TICKETS -->
       <section id="tickets" class="tickets-section">
         <div class="container tickets-container">
           <div class="tickets-info">
-                  <h2>Aparta tus entradas!</h2>
-                  <p>No te pierdas nuestra siguiente función!</p>
-                    <img class="tickets-img" src="assets/images/tickets-novacinema.png" alt="">
-              </div>
+            <h2>Aparta tus entradas!</h2>
+            <p>No te pierdas nuestra siguiente función!</p>
+            <img class="tickets-img" src="assets/images/tickets-novacinema.png" alt="Tickets Nova-Cinema">
+          </div>
           <div class="tickets-form-box">
             <h2>Aparta aquí</h2>
-
             <form id="ticketsForm" class="tickets-form">
+
               <div class="form-group">
                 <label for="userName">Nombre</label>
                 <input type="text" id="userName" placeholder="Escribe tu nombre">
               </div>
 
+              <!-- CORRECCIÓN 4: Se añadió id="email" para enlazar con su <label for="email"> -->
               <div class="form-group">
                 <label for="email">Correo Electrónico</label>
-                <input type="email" placeholder="Escribe tu correo electrónico">
+                <input type="email" id="email" placeholder="Escribe tu correo electrónico">
               </div>
 
               <div class="form-group">
@@ -201,9 +189,10 @@
                 </select>
               </div>
 
+              <!-- CORRECCIÓN 5: Se añadió id="cantidadAsientos" para identificar el input correctamente -->
               <div class="form-group">
-                <label>Cantidad de asientos</label>
-                <input type="number">
+                <label for="cantidadAsientos">Cantidad de asientos</label>
+                <input type="number" id="cantidadAsientos" min="1">
               </div>
 
               <div class="form-group">
@@ -225,55 +214,6 @@
         </div>
       </section>
 
-      <!-- <section class="reviews-section">
-      <div class="reviews-wrapper">
-        <div class="reviews-form-group">
-                  <label for="userNameReview">Nombre</label>
-                  <input class="reviews-form-group" type="text" id="userNameReview" placeholder="Escribe tu nombre">
-                </div>
-
-                <div class="reviews-form-group">
-                  <label for="movieSelect">Película</label>
-                  <select id="movieSelect">
-                    <option value="">Selecciona una película</option>
-                    <option value="El Caballero de la Noche">El Caballero de la Noche</option>
-                    <option value="City of God">City of God</option>
-                    <option value="Avengers">Avengers</option>
-                    <option value="Peaky Blinders">Peaky Blinders</option>
-                    <option value="Coach Carter">Coach Carter</option>
-                    <option value="Dragon Ball Super: Broly">Dragon Ball Super: Broly</option>
-                  </select>
-                </div>
-
-                <div class="reviews-form-group">
-                  <label>Calificación</label>
-                  <div class="stars" id="starRating">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                  </div>
-                  <small id="ratingText">Selecciona una calificación</small>
-                </div>
-
-                <div class="reviews-form-group">
-                  <label for="commentText">Comentario</label>
-                  <textarea id="commentText" rows="5" placeholder="Escribe tu opinión sobre una película..."></textarea>
-                </div>
-
-                <button type="submit" class="publish-btn">Publicar crítica</button>
-                <p id="message" class="message"></p>
-              </form>
-            </div>
-
-            <div class="comments-box">
-              <h3>Opiniones publicadas</h3>
-              <div id="commentsList">
-                <p class="empty-comment">Todavía no hay comentarios publicados.</p>
-              </div>
-            </div>
-      </section> -->
     </main>
 
     <footer class="footer">

@@ -147,6 +147,8 @@ body{
 .search-section{
     padding: 80px 10%;
     text-align: center;
+    position: relative;
+    z-index: 3;
 }
 
 .search-container{

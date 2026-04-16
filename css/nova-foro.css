@@ -1,3 +1,12 @@
+/* CORRECCIÓN 1: Se añadió :root con las variables necesarias.
+   --accent-color se usaba en .comments-box h3 y .comment-item
+   pero nunca estaba definida en este archivo. */
+:root {
+    --accent-color: #91140f;
+    --primary-color: #571f1f;
+    --secondary-color: #c4b697;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -26,7 +35,6 @@ body{
     font-size: 20px;
 }
 
-
 .reviews-wrapper{
     width: 100%;
     max-width: 900px;
@@ -38,7 +46,6 @@ body{
     flex-direction: column;
     gap: 20px;
 }
-
 
 .reviews-form-group{
     display: flex;
@@ -52,7 +59,6 @@ body{
     font-weight: 600;
 }
 
-
 .reviews-form-group input, .reviews-form-group select{
     width: 100%;
     padding: 12px;
@@ -61,8 +67,8 @@ body{
     background: #f5ebd2;
     color: #3d2b1f;
     font-family: "Girassol", serif;
+    font-size: 16px;
 }
-
 
 .reviews-form-group textarea{
     width: 100%;
@@ -72,7 +78,21 @@ body{
     background: #f5ebd2;
     color: #3d2b1f;
     font-family: "Girassol", serif;
+    font-size: 16px;
     resize: none;
+}
+
+.stars{
+    display: flex;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.star{
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
 #ratingText{
@@ -103,6 +123,7 @@ body{
 .message{
     text-align: center;
     margin-top: 10px;
+    font-size: 16px;
 }
 
 .comments-box{
@@ -118,20 +139,26 @@ body{
 
 .comments-box h3{
     text-align: center;
+    /* Ahora --accent-color sí está definida en este archivo */
     color: var(--accent-color);
     margin-bottom: 20px;
 }
 
-
-/* Esto es para saber como se va a ver cada comentario */
 .comment-item{
     background: #fff8e7;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 15px;
+    /* Ahora --accent-color sí está definida en este archivo */
     border-left: 5px solid var(--accent-color);
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     color: #3d2b1f;
+}
+
+.comment-item .stars-display{
+    color: #f5a623;
+    font-size: 20px;
+    margin: 4px 0;
 }
 
 .empty-comment{
