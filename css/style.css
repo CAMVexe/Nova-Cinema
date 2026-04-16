@@ -190,6 +190,18 @@ body{
     border-color: var(--accent-color);
     box-shadow: 0 0 6px rgba(0,0,0,0.2);
 }
+
+.no-results {
+    display: none;
+    color: var(--bg-color);
+    font-size: 18px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.no-results.show {
+    display: block;
+}
 /* BUSCADOR FINAL */
 
 
@@ -400,7 +412,72 @@ body{
     opacity: 0.9;
 }
 
-/* FORMULARIO DE TICKETS FINAL */
+/* POPUP ALERTAS INICIO */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: linear-gradient(135deg, #f5ebd2 0%, #e8dcc4 100%);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    max-width: 400px;
+    animation: popupAparecer 0.3s ease-out;
+}
+
+@keyframes popupAparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-content p {
+    color: var(--text-color);
+    font-size: 20px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.popup-content button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: "Girassol", serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.popup-content button:hover {
+    background: #b81a14;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(145, 20, 15, 0.4);
+}
+
+#closePopup {
+    width: 100%;
+    max-width: 200px;
+}
+/* POPUP ALERTAS FINAL */
 
 .footer{
     text-align: center;

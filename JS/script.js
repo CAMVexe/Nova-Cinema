@@ -36,7 +36,7 @@ entradaBusqueda.addEventListener("input", () => {
     }
   });
 
-  mensajeSinResultados.style.display = coincidenciaEncontrada ? "none" : "block";
+  mensajeSinResultados.classList.toggle("show", !coincidenciaEncontrada);
 });
 
 
