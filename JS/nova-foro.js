@@ -1,4 +1,8 @@
 // ─── ESTRELLAS INTERACTIVAS ───────────────────────────────────────────────────
+// Sistema de calificación de 1 a 5 estrellas.
+// mouseover: muestra una vista previa iluminando hasta la estrella señalada.
+// mouseout: vuelve a mostrar la calificación guardada.
+// click: guarda la calificación definitiva en selectedRating.
 const stars = document.querySelectorAll(".star");
 const ratingText = document.getElementById("ratingText");
 let selectedRating = 0; // guarda la calificación que el usuario eligió
@@ -17,12 +21,12 @@ stars.forEach(star => {
         highlightStars(parseInt(star.dataset.value));
     });
 
-    // Al salir el mouse, vuelve a mostrar la selección actual
+    // Al salir el mouse, vuelve a mostrar la selección guardada
     star.addEventListener("mouseout", () => {
         highlightStars(selectedRating);
     });
 
-    // Al hacer clic, guarda la calificación definitiva
+    // Al hacer clic, confirma la calificación elegida
     star.addEventListener("click", () => {
         selectedRating = parseInt(star.dataset.value);
         ratingText.textContent = `${selectedRating} de 5 estrellas`;
@@ -30,7 +34,9 @@ stars.forEach(star => {
 });
 
 
-// ─── MENÚ HAMBURGUESA (para la navbar reutilizada de index) ───────────────────
+// ─── MENÚ HAMBURGUESA ────────────────────────────────────────────────────────
+// Reutiliza la navbar del index. El guard con if(menuToggle) evita errores
+// si el componente no estuviera presente en la página.
 const menuToggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
 
@@ -48,6 +54,9 @@ if (menuToggle) {
 
 
 // ─── FORMULARIO DE RESEÑAS ────────────────────────────────────────────────────
+// Valida que nombre, película, calificación (>0) y comentario estén completos.
+// Si pasa la validación, crea un nuevo .comment-item y lo inserta en el DOM
+// sin recargar la página. Los comentarios no persisten al recargar (solo JS, sin backend).
 const reviewForm = document.getElementById("reviewForm");
 const commentsList = document.getElementById("commentsList");
 const messageEl = document.getElementById("message");
@@ -59,14 +68,14 @@ reviewForm.addEventListener("submit", (evento) => {
     const pelicula = document.getElementById("movieSelect").value;
     const comentario = document.getElementById("commentText").value.trim();
 
-    // Validación: todos los campos son obligatorios
+    // Validación: todos los campos son obligatorios, incluyendo haber seleccionado estrellas
     if (!nombre || !pelicula || selectedRating === 0 || !comentario) {
         messageEl.textContent = "Por favor completa todos los campos.";
         messageEl.style.color = "#ff6b6b";
         return;
     }
 
-    // Crear el elemento del comentario
+    // Crear el elemento del comentario y añadirlo al DOM
     const commentItem = document.createElement("div");
     commentItem.classList.add("comment-item");
     commentItem.innerHTML = `
@@ -81,7 +90,7 @@ reviewForm.addEventListener("submit", (evento) => {
 
     commentsList.appendChild(commentItem);
 
-    // Resetear el formulario
+    // Resetear el formulario y la calificación de estrellas
     reviewForm.reset();
     selectedRating = 0;
     highlightStars(0);

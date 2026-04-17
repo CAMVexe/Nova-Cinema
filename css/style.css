@@ -83,6 +83,19 @@ body{
 /* NAVBAR FINAL */
 
 /* HERO INICIO */
+
+/* Animación de entrada del hero: el contenido sube desde abajo y aparece (Persona 5) */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .hero{
     height: 80vh;
     display: flex;
@@ -96,6 +109,20 @@ body{
     color: var(--secondary-color);
     padding: 0 30px;
     border-bottom: 3px solid #91140f;
+}
+
+/* El contenido del hero entra con la animación de póster cinematográfico */
+.hero-content {
+    animation: fadeSlideUp 1s ease-out both;
+}
+
+/* El subtítulo y el botón entran con un pequeño delay para efecto escalonado */
+.hero-subtitle {
+    animation: fadeSlideUp 1s ease-out 0.3s both;
+}
+
+.hero-button {
+    animation: fadeSlideUp 1s ease-out 0.6s both;
 }
 
 .hero-img{
@@ -271,13 +298,24 @@ body{
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     border-radius: 14px;
     text-align: center;
-    transition: 0.3s;
+    /* transition cubre tanto el hover como el fade del buscador */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     color: black;
 }
 
+/* Clase que aplica el JS cuando la card no coincide con la búsqueda */
+.movie-card.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+}
+
 .movie-card:hover{
-    transform: translateY(12px);
+    /* translateY negativo: la tarjeta sube (efecto de elevación, no de caída) */
+    transform: translateY(-8px);
     cursor: pointer;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.8);
 }
 
 .movie-card h3{
@@ -482,6 +520,35 @@ body{
 .footer{
     text-align: center;
     background: black;
+    padding: 20px 40px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* Links de contacto en el footer: pequeños, discretos, estilo cine */
+.footer-links {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-sep {
+    color: #555;
+    font-size: 12px;
 }
 
 /* RESPONSIVE */
