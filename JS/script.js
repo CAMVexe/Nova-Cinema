@@ -1,68 +1,75 @@
 // ─── MENÚ HAMBURGUESA ────────────────────────────────────────────────────────
-// toggleMenu: controla la apertura y cierre del menú en móvil y tablet.
-// Alterna la clase "active" en nav-links, que el CSS usa para mostrarlo u ocultarlo.
-// El forEach cierra el menú automáticamente al seleccionar cualquier enlace.
+// Controla el menú desplegable en móvil/tablet.
+// Al hacer clic en el ícono de tres líneas, se añade/quita la clase "active"
+// que el CSS usa para mostrar u ocultar el nav-links.
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
 
-const menuToggle = document.getElementById("menu-toggle");             // ícono de tres líneas
-const navLinks   = document.getElementById("nav-links");               // lista de links del nav
-
+// se crea un evento que se activa cuando el usuario hace clic en el btn
 menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");                                  // abre si está cerrado, cierra si está abierto
+  navLinks.classList.toggle("active");
 });
 
+// Cierra el menú al hacer clic en cualquier enlace (comportamiento estándar en móvil)
 navLinks.querySelectorAll("a").forEach(link => {
+
+  // A cada enlace se le agrega un evento click que se activa cuando el usuario hace clic en el
   link.addEventListener("click", () => {
-    navLinks.classList.remove("active");                                // cierra el menú al navegar
+    navLinks.classList.remove("active");
   });
 });
 
 
 // ─── BÚSQUEDA EN EL CATÁLOGO ─────────────────────────────────────────────────
-// filterMovies: filtra las tarjetas en tiempo real comparando el texto escrito
-// contra data-title y data-genre de cada card usando toLowerCase para ignorar mayúsculas.
-// Usa clase .hidden para que el CSS maneje la transición suave en vez de cortar con display:none.
+// Filtra las tarjetas de películas en tiempo real mientras el usuario escribe.
+// Compara el texto ingresado contra el data-title y data-genre de cada .movie-card.
+// Se usa la clase CSS .hidden en vez de display:none para permitir
+// una transición suave de opacidad al filtrar (integración Persona 5).
+const entradaBusqueda = document.getElementById("searchInput");
+const listaPeliculas = document.querySelectorAll(".movie-card");
+const mensajeSinResultados = document.getElementById("noResults");
 
-const entradaBusqueda      = document.getElementById("searchInput");   // campo de texto del buscador
-const listaPeliculas       = document.querySelectorAll(".movie-card"); // todas las tarjetas del grid
-const mensajeSinResultados = document.getElementById("noResults");     // aviso de "sin resultados"
-
-entradaBusqueda.addEventListener("input", () => {                      // "input" captura pegado y autocompletado
-  const textoBusqueda = entradaBusqueda.value.toLowerCase();           // normaliza a minúsculas para comparar
+entradaBusqueda.addEventListener("input", () => {
+  const textoBusqueda = entradaBusqueda.value.toLowerCase();
   let coincidenciaEncontrada = false;
 
+  // Recorremos cada película
   listaPeliculas.forEach(pelicula => {
-    const titulo = pelicula.dataset.title.toLowerCase();               // lee atributo data-title del HTML
-    const genero = pelicula.dataset.genre.toLowerCase();               // lee atributo data-genre del HTML
+    const titulo = pelicula.dataset.title.toLowerCase();
+    const genero = pelicula.dataset.genre.toLowerCase();
 
+    // Verificamos si el texto ingresado coincide con el título o el género
     if (titulo.includes(textoBusqueda) || genero.includes(textoBusqueda)) {
-      pelicula.classList.remove("hidden");                             // card visible — coincide con la búsqueda
+      pelicula.classList.remove("hidden");
       coincidenciaEncontrada = true;
+
     } else {
-      pelicula.classList.add("hidden");                                // card oculta con fade via CSS
+      pelicula.classList.add("hidden");
     }
   });
 
-  mensajeSinResultados.classList.toggle("show", !coincidenciaEncontrada); // muestra aviso si no hay resultados
+  // Muestra u oculta el mensaje de "sin resultados" según haya coincidencias
+  mensajeSinResultados.classList.toggle("show", !coincidenciaEncontrada);
 });
 
 
-// ─── POPUP DE ALERTAS ────────────────────────────────────────────────────────
-// showPopup / closePopup: controlan la ventana modal de confirmación y error.
-// mostrarVentana inyecta el mensaje recibido y cambia display a flex para centrar el contenido.
-// cerrarVentana lo oculta volviendo display a none.
+// ─── FORMULARIO DE RESERVAS ───────────────────────────────────────────────────
+// Maneja la reserva de tickets: valida que todos los campos estén llenos
+// antes de confirmar, y muestra un popup en ambos casos (error o éxito).
+const formularioReservas = document.getElementById("ticketsForm");
+const ventanaEmergente = document.getElementById("popup");
+const textoPopup = document.getElementById("popupMessage");
+const botonCerrarPopup = document.getElementById("closePopup");
 
-const formularioReservas = document.getElementById("ticketsForm");     // formulario principal de reservas
-const ventanaEmergente   = document.getElementById("popup");           // contenedor del modal
-const textoPopup         = document.getElementById("popupMessage");    // párrafo donde se muestra el mensaje
-const botonCerrarPopup   = document.getElementById("closePopup");      // botón de cerrar del modal
-
+// Muestra el popup con el mensaje recibido como argumento
 function mostrarVentana(mensaje) {
-  textoPopup.textContent = mensaje;                                    // escribe el mensaje en el modal
-  ventanaEmergente.style.display = "flex";                             // flex para centrar el contenido
+  textoPopup.textContent = mensaje;
+  ventanaEmergente.style.display = "flex";
 }
 
+// Cierra el popup al hacer clic en "Cerrar"
 function cerrarVentana() {
-  ventanaEmergente.style.display = "none";                             // oculta el modal
+  ventanaEmergente.style.display = "none";
 }
 
 botonCerrarPopup.addEventListener("click", cerrarVentana);             // cierra al hacer clic en "Cerrar"
@@ -73,15 +80,18 @@ botonCerrarPopup.addEventListener("click", cerrarVentana);             // cierra
 // preventDefault cancela el reload del navegador para manejar todo desde JS.
 // parseInt en asientos evita que valores como 0 o negativos pasen la validación.
 
-formularioReservas.addEventListener("submit", (evento) => {
-  evento.preventDefault();                                             // evita que la página se recargue
 
-  const nombreUsuario      = document.getElementById("userName").value.trim();         // elimina espacios al inicio y final
-  const correo             = document.getElementById("email").value.trim();
+// Esto se ejecuta cuando el usuario envía el formulario
+formularioReservas.addEventListener("submit", (evento) => {
+  evento.preventDefault();
+
+  const nombreUsuario = document.getElementById("userName").value.trim();
+  const correo = document.getElementById("email").value.trim();
   const peliculaSeleccionada = document.getElementById("movieSelect").value;
   const cantidadAsientos   = document.getElementById("cantidadAsientos").value;
   const fechaFuncion       = document.getElementById("fecha-funcion").value;
 
+  // Validación: ningún campo puede quedar vacío
   if (
     nombreUsuario === ""       ||
     correo === ""              ||
@@ -90,10 +100,13 @@ formularioReservas.addEventListener("submit", (evento) => {
     parseInt(cantidadAsientos) < 1 ||                                  // rechaza 0 y negativos
     fechaFuncion === ""
   ) {
-    mostrarVentana("Por favor completa todos los campos correctamente");
-    return;                                                            // detiene la ejecución si hay error
+    mostrarVentana("Por favor completa todos los campos");
+    return;
   }
 
+  // Si todo bien, mostramos mensaje de éxito
   mostrarVentana("¡Reserva realizada con éxito!");
-  formularioReservas.reset();                                          // limpia todos los campos del formulario
+  formularioReservas.reset();
 });
+
+botonCerrarPopup.addEventListener("click", cerrarVentana);
