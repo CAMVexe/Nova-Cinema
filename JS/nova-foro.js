@@ -1,106 +1,100 @@
 // ─── ESTRELLAS INTERACTIVAS ───────────────────────────────────────────────────
-// Sistema de calificación de 1 a 5 estrellas.
-// mouseover: muestra una vista previa iluminando hasta la estrella señalada.
-// mouseout: vuelve a mostrar la calificación guardada.
-// click: guarda la calificación definitiva en selectedRating.
-const stars = document.querySelectorAll(".star");
-const ratingText = document.getElementById("ratingText");
-let selectedRating = 0; // guarda la calificación que el usuario eligió
+// highlightStars: pinta de dorado las primeras N estrellas y en gris el resto.
+// mouseover muestra vista previa, mouseout restaura la selección guardada,
+// click confirma la calificación en selectedRating y actualiza el texto descriptivo.
 
-// Pinta N estrellas de color dorado y el resto en gris
+const stars      = document.querySelectorAll(".star");                 // los 5 spans de estrellas
+const ratingText = document.getElementById("ratingText");              // texto "X de 5 estrellas"
+let selectedRating = 0;                                                // calificación confirmada por el usuario
+
 function highlightStars(count) {
-    stars.forEach(star => {
-        const val = parseInt(star.dataset.value);
-        star.style.color = val <= count ? "#f5a623" : "#ccc";
-    });
+  stars.forEach(star => {
+    const val = parseInt(star.dataset.value);                          // lee data-value="1" al "5" del HTML
+    star.style.color = val <= count ? "#f5a623" : "#ccc";             // dorado si entra en el rango, gris si no
+  });
 }
 
 stars.forEach(star => {
-    // Al pasar el mouse, muestra una vista previa
-    star.addEventListener("mouseover", () => {
-        highlightStars(parseInt(star.dataset.value));
-    });
+  star.addEventListener("mouseover", () => {
+    highlightStars(parseInt(star.dataset.value));                      // vista previa hasta la estrella señalada
+  });
 
-    // Al salir el mouse, vuelve a mostrar la selección guardada
-    star.addEventListener("mouseout", () => {
-        highlightStars(selectedRating);
-    });
+  star.addEventListener("mouseout", () => {
+    highlightStars(selectedRating);                                    // restaura la selección guardada al salir
+  });
 
-    // Al hacer clic, confirma la calificación elegida
-    star.addEventListener("click", () => {
-        selectedRating = parseInt(star.dataset.value);
-        ratingText.textContent = `${selectedRating} de 5 estrellas`;
-    });
+  star.addEventListener("click", () => {
+    selectedRating = parseInt(star.dataset.value);                     // guarda la calificación definitiva
+    ratingText.textContent = `${selectedRating} de 5 estrellas`;      // actualiza el texto visible
+  });
 });
 
 
 // ─── MENÚ HAMBURGUESA ────────────────────────────────────────────────────────
-// Reutiliza la navbar del index. El guard con if(menuToggle) evita errores
-// si el componente no estuviera presente en la página.
-const menuToggle = document.getElementById("menu-toggle");
-const navLinks = document.getElementById("nav-links");
+// toggleMenu: reutiliza la misma lógica del navbar del index.html.
+// El guard if(menuToggle) previene errores si el elemento no existe en la página.
+// Igual que en index, cierra el menú al hacer clic en cualquier enlace.
 
-if (menuToggle) {
-    menuToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
+const menuToggle = document.getElementById("menu-toggle");             // ícono de tres líneas
+const navLinks   = document.getElementById("nav-links");               // lista de links del nav
 
-    navLinks.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("active");
-        });
+if (menuToggle) {                                                      // guard: evita error si no está en el DOM
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");                               // abre si está cerrado, cierra si está abierto
+  });
+
+  navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");                             // cierra el menú al navegar
     });
+  });
 }
 
 
 // ─── FORMULARIO DE RESEÑAS ────────────────────────────────────────────────────
-// Valida que nombre, película, calificación (>0) y comentario estén completos.
-// Si pasa la validación, crea un nuevo .comment-item y lo inserta en el DOM
-// sin recargar la página. Los comentarios no persisten al recargar (solo JS, sin backend).
-const reviewForm = document.getElementById("reviewForm");
-const commentsList = document.getElementById("commentsList");
-const messageEl = document.getElementById("message");
+// submitReview: valida los 4 campos incluida la calificación de estrellas (>0).
+// Si pasa, construye un div.comment-item con innerHTML y lo inserta en el DOM.
+// Los comentarios no persisten al recargar porque no hay backend ni localStorage.
+
+const reviewForm    = document.getElementById("reviewForm");           // formulario de reseñas
+const commentsList  = document.getElementById("commentsList");         // contenedor donde se insertan los comentarios
+const messageEl     = document.getElementById("message");              // párrafo de feedback al usuario
 
 reviewForm.addEventListener("submit", (evento) => {
-    evento.preventDefault();
+  evento.preventDefault();                                             // evita que la página se recargue
 
-    const nombre = document.getElementById("userNameReview").value.trim();
-    const pelicula = document.getElementById("movieSelect").value;
-    const comentario = document.getElementById("commentText").value.trim();
+  const nombre     = document.getElementById("userNameReview").value.trim(); // trim elimina espacios al inicio y final
+  const pelicula   = document.getElementById("movieSelect").value;
+  const comentario = document.getElementById("commentText").value.trim();
 
-    // Validación: todos los campos son obligatorios, incluyendo haber seleccionado estrellas
-    if (!nombre || !pelicula || selectedRating === 0 || !comentario) {
-        messageEl.textContent = "Por favor completa todos los campos.";
-        messageEl.style.color = "#ff6b6b";
-        return;
-    }
+  if (!nombre || !pelicula || selectedRating === 0 || !comentario) {  // selectedRating===0 significa sin estrellas
+    messageEl.textContent = "Por favor completa todos los campos.";
+    messageEl.style.color = "#ff6b6b";                                 // rojo para indicar error
+    return;                                                            // detiene la ejecución si hay error
+  }
 
-    // Crear el elemento del comentario y añadirlo al DOM
-    const commentItem = document.createElement("div");
-    commentItem.classList.add("comment-item");
-    commentItem.innerHTML = `
-        <strong>${nombre}</strong> — <em>${pelicula}</em>
-        <div class="stars-display">${"★".repeat(selectedRating)}${"☆".repeat(5 - selectedRating)}</div>
-        <p>${comentario}</p>
-    `;
+  const commentItem = document.createElement("div");                  // crea el elemento en memoria
+  commentItem.classList.add("comment-item");
+  commentItem.innerHTML = `
+    <strong>${nombre}</strong> — <em>${pelicula}</em>
+    <div class="stars-display">${"★".repeat(selectedRating)}${"☆".repeat(5 - selectedRating)}</div>
+    <p>${comentario}</p>
+  `;                                                                   // ★ repite estrellas llenas, ☆ las vacías
 
-    // Si existe el mensaje de "sin comentarios", eliminarlo antes de añadir el primero
-    const emptyMsg = commentsList.querySelector(".empty-comment");
-    if (emptyMsg) emptyMsg.remove();
+  const emptyMsg = commentsList.querySelector(".empty-comment");
+  if (emptyMsg) emptyMsg.remove();                                     // elimina el placeholder "sin comentarios"
 
-    commentsList.appendChild(commentItem);
+  commentsList.appendChild(commentItem);                               // inserta el nuevo comentario en el DOM
 
-    // Resetear el formulario y la calificación de estrellas
-    reviewForm.reset();
-    selectedRating = 0;
-    highlightStars(0);
-    ratingText.textContent = "Selecciona una calificación";
+  reviewForm.reset();                                                  // limpia todos los campos
+  selectedRating = 0;
+  highlightStars(0);                                                   // apaga todas las estrellas
+  ratingText.textContent = "Selecciona una calificación";
 
-    messageEl.textContent = "¡Crítica publicada con éxito!";
-    messageEl.style.color = "#90ee90";
+  messageEl.textContent = "¡Crítica publicada con éxito!";
+  messageEl.style.color = "#90ee90";                                   // verde para indicar éxito
 
-    // Limpiar el mensaje de éxito después de 3 segundos
-    setTimeout(() => {
-        messageEl.textContent = "";
-    }, 3000);
+  setTimeout(() => {
+    messageEl.textContent = "";                                        // borra el mensaje después de 3 segundos
+  }, 3000);
 });

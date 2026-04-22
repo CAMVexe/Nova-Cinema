@@ -1,207 +1,208 @@
-/* CORRECCIÓN 1: Se añadió :root con las variables necesarias.
-   --accent-color se usaba en .comments-box h3 y .comment-item
-   pero nunca estaba definida en este archivo. */
+/* ─── VARIABLES Y RESET ──────────────────────────────────────────────────────
+   Define las mismas variables del tema para que funcionen en esta página.
+   nova-foro.html carga este archivo después de style.css, por lo que los
+   estilos del navbar y footer ya vienen heredados desde style.css. */
+
 :root {
-    --accent-color: #91140f;
-    --primary-color: #571f1f;
-    --secondary-color: #c4b697;
+  --accent-color:    #91140f;   /* rojo cine — botones y énfasis */
+  --primary-color:   #571f1f;   /* rojo oscuro — fondo del formulario */
+  --secondary-color: #c4b697;   /* crema dorado — hover de links */
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Girassol", serif;
-    background-color: #571f1f;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Girassol", serif;
+  background-color: #571f1f;
 }
 
-.reviews-section{
-    padding: 100px 10%;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(../assets/images/fondo-patron-decorativo.png);
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+/* ─── SECCIÓN DE RESEÑAS ─────────────────────────────────────────────────────
+   Contenedor principal del foro con fondo de patrón decorativo semitransparente.
+   Usa flexbox en columna para apilar el formulario y la lista de comentarios.
+   reviews-wrapper es la tarjeta oscura que envuelve el formulario completo. */
+
+.reviews-section {
+  padding: 100px 10%;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+              url(../assets/images/fondo-patron-decorativo.png);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.reviews-section h1{
-    color: white;
-    font-size: 40px;
+.reviews-section h1 {
+  color: white;
+  font-size: 40px;
 }
 
-.reviews-section p{
-    color: white;
-    font-size: 20px;
+.reviews-section p {
+  color: white;
+  font-size: 20px;
 }
 
-.reviews-wrapper{
-    width: 100%;
-    max-width: 900px;
-    background: linear-gradient(135deg, #7a1c1c, #571f1f);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.reviews-wrapper {
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(135deg, #7a1c1c, #571f1f);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.reviews-form-group{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+
+/* ─── CAMPOS DEL FORMULARIO ──────────────────────────────────────────────────
+   Cada campo usa un .reviews-form-group en columna con label arriba e input abajo.
+   El fondo crema (#f5ebd2) contrasta con el wrapper oscuro para legibilidad.
+   textarea tiene resize:none para mantener el layout controlado. */
+
+.reviews-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.reviews-form-group label{
-    margin-bottom: 5px;
-    color: #f5ebd2;
-    font-weight: 600;
+.reviews-form-group label {
+  margin-bottom: 5px;
+  color: #f5ebd2;
+  font-weight: 600;
 }
 
-.reviews-form-group input, .reviews-form-group select{
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background: #f5ebd2;
-    color: #3d2b1f;
-    font-family: "Girassol", serif;
-    font-size: 16px;
+.reviews-form-group input,
+.reviews-form-group select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #f5ebd2;                               /* crema para contraste con el wrapper oscuro */
+  color: #3d2b1f;
+  font-family: "Girassol", serif;
+  font-size: 16px;
 }
 
-.reviews-form-group textarea{
-    width: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    border: none;
-    background: #f5ebd2;
-    color: #3d2b1f;
-    font-family: "Girassol", serif;
-    font-size: 16px;
-    resize: none;
+.reviews-form-group textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  background: #f5ebd2;
+  color: #3d2b1f;
+  font-family: "Girassol", serif;
+  font-size: 16px;
+  resize: none;                                      /* evita que el usuario redimensione el textarea */
 }
 
-.stars{
-    display: flex;
-    gap: 6px;
-    margin: 8px 0;
+
+/* ─── SISTEMA DE ESTRELLAS ───────────────────────────────────────────────────
+   Las 5 estrellas son spans con cursor pointer manejados completamente desde JS.
+   El color por defecto es gris (#ccc) y el JS lo cambia a dorado al interactuar.
+   ratingText muestra el texto "X de 5 estrellas" debajo de las estrellas. */
+
+.stars {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
 }
 
-.star{
-    font-size: 30px;
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.2s;
+.star {
+  font-size: 30px;
+  color: #ccc;                                       /* gris por defecto, el JS cambia a dorado */
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-#ratingText{
-    color: #f5ebd2;
-    font-size: 14px;
+#ratingText {
+  color: #f5ebd2;
+  font-size: 14px;
 }
 
-.publish-btn{
-    margin-top: 15px;
-    align-self: center;
-    padding: 20px 40px;
-    border: none;
-    border-radius: 12px;
-    background: #91140f;
-    color: #fff;
-    font-family: "Girassol", serif;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+
+/* ─── BOTÓN PUBLICAR Y FEEDBACK ──────────────────────────────────────────────
+   Botón centrado con hover que lo eleva ligeramente para consistencia con el resto.
+   .message muestra el resultado de la validación en rojo (error) o verde (éxito).
+   El JS limpia el mensaje de éxito automáticamente después de 3 segundos. */
+
+.publish-btn {
+  margin-top: 15px;
+  align-self: center;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 12px;
+  background: #91140f;
+  color: #fff;
+  font-family: "Girassol", serif;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.publish-btn:hover{
-    transform: translateY(-3px);
-    opacity: 0.9;
+.publish-btn:hover {
+  transform: translateY(-3px);                       /* eleva el botón igual que las tarjetas */
+  opacity: 0.9;
 }
 
-.message{
-    text-align: center;
-    margin-top: 10px;
-    font-size: 16px;
+.message {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;                                   /* el color lo define el JS según error o éxito */
 }
 
-.comments-box{
-    width: 100%;
-    max-width: 900px;
-    margin-top: 40px;
-    background: linear-gradient(rgba(245, 235, 210, 0.7), rgba(245, 235, 210, 0.7)), url(../assets/images/tarjetas-bg.jpg);
-    background-size: cover;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+
+/* ─── LISTA DE COMENTARIOS ───────────────────────────────────────────────────
+   comments-box es el contenedor de fondo crema donde el JS inserta los comentarios.
+   Cada .comment-item tiene borde izquierdo rojo como acento visual del tema.
+   .stars-display muestra las estrellas en dorado usando caracteres Unicode ★ y ☆. */
+
+.comments-box {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 40px;
+  background: linear-gradient(rgba(245,235,210,0.7), rgba(245,235,210,0.7)),
+              url(../assets/images/tarjetas-bg.jpg);
+  background-size: cover;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-.comments-box h3{
-    text-align: center;
-    /* Ahora --accent-color sí está definida en este archivo */
-    color: var(--accent-color);
-    margin-bottom: 20px;
+.comments-box h3 {
+  text-align: center;
+  color: var(--accent-color);
+  margin-bottom: 20px;
 }
 
-.comment-item{
-    background: #fff8e7;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    /* Ahora --accent-color sí está definida en este archivo */
-    border-left: 5px solid var(--accent-color);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    color: #3d2b1f;
+.comment-item {
+  background: #fff8e7;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border-left: 5px solid var(--accent-color);        /* acento rojo a la izquierda de cada reseña */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  color: #3d2b1f;
 }
 
-.comment-item p{
-    color: #3d2b1f;
+.comment-item p {
+  color: #3d2b1f;
 }
 
-.comment-item .stars-display{
-    color: #f5a623;
-    font-size: 20px;
-    margin: 4px 0;
+.comment-item .stars-display {
+  color: #f5a623;                                    /* dorado para las estrellas de la reseña */
+  font-size: 20px;
+  margin: 4px 0;
 }
 
-.comments-box .empty-comment{
-    text-align: center;
-    color: #3d2b1f;
-    font-style: italic;
-    padding: 20px;
+.comments-box .empty-comment {
+  text-align: center;
+  color: #3d2b1f;
+  font-style: italic;
+  padding: 20px;                                     /* placeholder cuando no hay reseñas publicadas */
 }
 
-/* FOOTER (espejado de style.css para consistencia entre páginas) */
-.footer {
-    text-align: center;
-    background: black;
-    padding: 20px 40px;
-    color: #888;
-    font-size: 13px;
-}
 
-.footer-links {
-    margin-top: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.footer-links a {
-    color: #888;
-    text-decoration: none;
-    font-size: 12px;
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: var(--secondary-color);
-}
-
-.footer-sep {
-    color: #555;
-    font-size: 12px;
-}

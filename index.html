@@ -11,11 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Girassol&display=swap" rel="stylesheet">
   </head>
   <body>
+
+    <!-- NAVBAR: barra de navegación principal
+         Sticky en la parte superior, visible durante todo el scroll.
+         En móvil el menú se oculta y el JS activa el ícono hamburguesa. -->
     <nav class="navbar">
       <div class="logo">
-        <img class="navbar-logo" src="assets/images/navbarlogo.png">NOVA<span>CINEMA</span>
+        <img class="navbar-logo" src="assets/images/navbarlogo.png" alt="Logo Nova-Cinema">NOVA<span>CINEMA</span>
       </div>
-      <div class="menu-toggle" id="menu-toggle">
+      <div class="menu-toggle" id="menu-toggle"> <!-- ícono hamburguesa, visible solo en móvil -->
         <span></span>
         <span></span>
         <span></span>
@@ -25,26 +29,31 @@
         <li><a href="#">Nuevos Estrenos</a></li>
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="nova-foro.html">Nova-Foro</a></li>
-        <li><a href="#tickets" class="btn-contact">🎟 Entradas</a></li>
+        <li><a href="#tickets" class="btn-contact">🎟 Entradas</a></li> <!-- ancla a la sección de tickets -->
       </ul>
     </nav>
 
+    <!-- HERO: sección de portada principal
+         Imagen de fondo con overlay oscuro, logo animado y botón CTA.
+         hero-content entra con animación fadeSlideUp definida en style.css. -->
     <header class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="hero-subtitle">Club de Cine Independiente</p>
-        <div class="hero-logo"><img class="hero-img" src="assets/images/hero-logo.png" alt="Logo Nova-Cinema"></div>
+        <div class="hero-logo">
+          <img class="hero-img" src="assets/images/hero-logo.png" alt="Logo Nova-Cinema">
+        </div>
         <p class="hero-text">¡Ven y vive tus peliculas favoritas con el estilo del cine vintage!</p>
         <p class="hero-text">Descubre películas inolvidables, explora reseñas y comparte tu opinión en una experiencia con estilo cinematográfico.</p>
-        <a href="#tickets" class="hero-button">Apartar mis entradas</a>
+        <a href="#tickets" class="hero-button">Apartar mis entradas</a> <!-- baja a la sección de reservas -->
       </div>
     </header>
 
     <main>
 
-      <!-- CATALOGO -->
-      <!-- CORRECCIÓN 1: Se eliminó el <section> externo sin propósito.
-           La estructura correcta es: catalog-container > catalog-section > search-section -->
+      <!-- CATÁLOGO: sección de búsqueda y tarjetas de películas
+           catalog-container aplica el fondo de cortinas decorativas.
+           Cada article.movie-card tiene data-title y data-genre que el JS usa para filtrar. -->
       <div class="catalog-container">
         <section id="catalogo" class="catalog-section">
           <h2>Catálogo de películas</h2>
@@ -56,6 +65,9 @@
               <input type="text" id="searchInput" placeholder="Buscar por nombre o categoría...">
             </div>
 
+            <!-- GRID DE PELÍCULAS: tarjetas individuales
+                 data-title y data-genre son leídos por el JS del buscador.
+                 La clase .hidden la agrega/quita el JS para el filtrado con transición suave. -->
             <div class="movies-grid" id="moviesGrid">
 
               <article class="movie-card" data-title="Star Wars: A New Hope" data-genre="Sci-fi">
@@ -68,7 +80,7 @@
               </article>
 
               <article class="movie-card" data-title="Star Wars: Empire Strikes Back" data-genre="Sci-fi">
-                <img class="card-image" src="assets/images/movie8.jpg" alt="Póster de El Imperio Contrataaca">
+                <img class="card-image" src="assets/images/movie8.jpg" alt="Póster de El Imperio Contraataca">
                 <div class="movie-info">
                   <h3>Star Wars: Empire Strikes Back</h3>
                   <p class="genre">Sci-fi</p>
@@ -144,13 +156,12 @@
             <p id="noResults" class="no-results">No se encontraron películas con ese criterio.</p>
 
           </section>
-          <!-- CORRECCIÓN 2: Se eliminó el </div> huérfano que estaba aquí -->
-
         </section>
       </div>
-      <!-- CORRECCIÓN 3: Se añadió este </div> para cerrar catalog-container -->
 
-      <!-- TICKETS -->
+      <!-- FORMULARIO DE TICKETS: reserva de entradas
+           Layout de dos columnas: info con imagen flotante y formulario de reserva.
+           El popup de confirmación vive dentro del form y el JS lo activa al enviar. -->
       <section id="tickets" class="tickets-section">
         <div class="container tickets-container">
           <div class="tickets-info">
@@ -167,7 +178,6 @@
                 <input type="text" id="userName" placeholder="Escribe tu nombre">
               </div>
 
-              <!-- CORRECCIÓN 4: Se añadió id="email" para enlazar con su <label for="email"> -->
               <div class="form-group">
                 <label for="email">Correo Electrónico</label>
                 <input type="email" id="email" placeholder="Escribe tu correo electrónico">
@@ -178,7 +188,7 @@
                 <select id="movieSelect">
                   <option value="">Selecciona una película</option>
                   <option value="A New Hope">Star Wars: Una Nueva Esperanza</option>
-                  <option value="Empire Strikes Back">El Imperio Contrataaca</option>
+                  <option value="Empire Strikes Back">El Imperio Contraataca</option>
                   <option value="Return of the Jedi">El Retorno del Jedi</option>
                   <option value="El Caballero de la Noche">El Caballero de la Noche</option>
                   <option value="City of God">City of God</option>
@@ -189,10 +199,9 @@
                 </select>
               </div>
 
-              <!-- CORRECCIÓN 5: Se añadió id="cantidadAsientos" para identificar el input correctamente -->
               <div class="form-group">
                 <label for="cantidadAsientos">Cantidad de asientos</label>
-                <input type="number" id="cantidadAsientos" min="1">
+                <input type="number" id="cantidadAsientos" min="1"> <!-- min="1" evita valores negativos desde el HTML -->
               </div>
 
               <div class="form-group">
@@ -200,6 +209,9 @@
                 <input type="date" id="fecha-funcion">
               </div>
 
+              <!-- POPUP: modal de confirmación y error
+                   Oculto por defecto con display:none, el JS lo muestra con display:flex.
+                   Se posiciona fixed para cubrir toda la pantalla independiente del scroll. -->
               <div id="popup" class="popup">
                 <div class="popup-content">
                   <p id="popupMessage">Mensaje aquí</p>
@@ -216,12 +228,15 @@
 
     </main>
 
+    <!-- FOOTER: información de contacto y navegación
+         Links de correo y teléfono usan href="mailto:" y href="tel:" para abrir
+         la app correspondiente del dispositivo al hacer clic. -->
     <footer class="footer">
       <p>&copy; 2026 Nova-Cinema. Todos los derechos reservados.</p>
       <div class="footer-links">
-        <a href="mailto:novacinema@correo.com">novacinema@correo.com</a>
+        <a href="mailto:novacinema@correo.com">novacinema@correo.com</a> <!-- abre app de correo -->
         <span class="footer-sep">·</span>
-        <a href="tel:+50600000000">+506 0000-0000</a>
+        <a href="tel:+50600000000">+506 0000-0000</a>                   <!-- abre marcación en móvil -->
         <span class="footer-sep">·</span>
         <a href="#tickets">Comprar entradas</a>
         <span class="footer-sep">·</span>

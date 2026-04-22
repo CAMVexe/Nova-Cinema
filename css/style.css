@@ -1,729 +1,767 @@
-:root{
-    --primary-color: #571f1f;
-    --secondary-color:#c4b697;
-    --bg-color:#fff;
-    --text-color:#3d2b1f;
-    --accent-color:#91140f;
-    --card-bg:#c4b697;
-}
+/* ─── VARIABLES GLOBALES ─────────────────────────────────────────────────────
+   Define los colores del tema en un solo lugar usando custom properties de CSS.
+   Cambiar cualquier variable aquí actualiza ese color en toda la página.
+   Paleta oscura tipo cine: rojos, cremas y café para la estética cinematográfica. */
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body{
-    font-family: "Girassol", serif;
-    background: var(--primary-color);
-    color: white;
-    line-height: 1.6;
-}
-
-/* NAVBAR INICIO */
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 40px;
-    background-color: var(--secondary-color);
-    box-shadow: 0 5px 10px rgb(214, 148, 136);
-    position: sticky;
-    font-size: 20px;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 30px;
-    gap: 5px;
-    color: var(--text-color);
-    transition: 0.5s;
-}
-
-.logo span{
-    color: var(--accent-color);
-}
-
-.logo:hover{
-    transform: scale(1.1);
-}
-
-.navbar-logo{
-    margin-right: 15px;
-    max-width: 100px;
+:root {
+  --primary-color:   #571f1f;   /* rojo oscuro — fondo principal del body */
+  --secondary-color: #c4b697;   /* crema dorado — navbar, textos sobre oscuro */
+  --bg-color:        #fff;      /* blanco — fondo de elementos claros */
+  --text-color:      #3d2b1f;   /* café oscuro — texto sobre fondos claros */
+  --accent-color:    #91140f;   /* rojo cine — botones, títulos y énfasis */
+  --card-bg:         #c4b697;   /* crema — fondo base de tarjetas */
 }
 
 
-.nav-links{
-    margin-left: -80px;
-    display: flex;
-    list-style: none;
+/* ─── RESET GLOBAL ───────────────────────────────────────────────────────────
+   Elimina márgenes y paddings que el navegador aplica por defecto a todos los elementos.
+   box-sizing: border-box hace que el padding y border se incluyan en el ancho total
+   del elemento en vez de sumarse por fuera, evitando desbordamientos inesperados. */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;                    /* padding no agranda el elemento */
 }
 
-.nav-links li{
-    margin-left: 20px;
+body {
+  font-family: "Girassol", serif;            /* tipografía principal cargada desde Google Fonts */
+  background: var(--primary-color);
+  color: white;
+  line-height: 1.6;
 }
 
-.nav-links a{
-    text-decoration: none;
-    color: var(--primary-color);
-    font-weight: 600;
-    transition: 0.4;
+
+/* ─── NAVBAR ─────────────────────────────────────────────────────────────────
+   Barra de navegación fija en la parte superior usando position sticky.
+   Se mantiene visible durante el scroll gracias a top:0 y z-index alto.
+   En móvil el menú se oculta y aparece el ícono hamburguesa via media query. */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  background-color: var(--secondary-color);
+  box-shadow: 0 5px 10px rgb(214, 148, 136);
+  position: sticky;                          /* se queda pegada al hacer scroll */
+  top: 0;
+  z-index: 1000;                             /* encima de todos los demás elementos */
+  font-size: 20px;
 }
 
-.nav-links a:hover{
-    transform: translateX(10px);
-    cursor: pointer;
-    color: var(--accent-color);
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 30px;
+  gap: 5px;
+  color: var(--text-color);
+  transition: 0.5s;
 }
-/* NAVBAR FINAL */
 
-/* HERO INICIO */
+.logo span {
+  color: var(--accent-color);               /* "CINEMA" en rojo para el contraste del nombre */
+}
 
-/* Animación de entrada del hero: el contenido sube desde abajo y aparece (Persona 5) */
+.logo:hover {
+  transform: scale(1.1);                    /* crece ligeramente al pasar el mouse */
+}
+
+.navbar-logo {
+  margin-right: 15px;
+  max-width: 100px;
+}
+
+.nav-links {
+  margin-left: -80px;
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: color 0.4s ease, transform 0.4s ease; /* anima color y movimiento al hover */
+}
+
+.nav-links a:hover {
+  transform: translateX(10px);              /* desliza el link hacia la derecha */
+  cursor: pointer;
+  color: var(--accent-color);
+}
+
+.menu-toggle {
+  display: none;                            /* oculto en desktop, visible en móvil via media query */
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--primary-color);        /* las tres líneas del ícono hamburguesa */
+}
+
+
+/* ─── HERO ───────────────────────────────────────────────────────────────────
+   Sección de portada que ocupa el 80% de la pantalla con imagen de fondo.
+   El contenido entra animado con fadeSlideUp al cargar para efecto cinematográfico.
+   hero-subtitle y hero-button tienen delays para que aparezcan de forma escalonada. */
+
 @keyframes fadeSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(40px);            /* empieza invisible y desplazado 40px abajo */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);              /* termina en su posición normal */
+  }
 }
 
-.hero{
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../assets/images/novacinema-hero.png);
-    font-size: 25px;
-    background-size: cover;
-    background-position: center;
-    color: var(--secondary-color);
-    padding: 0 30px;
-    border-bottom: 3px solid #91140f;
+.hero {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url(../assets/images/novacinema-hero.png);
+  font-size: 25px;
+  background-size: cover;
+  background-position: center;
+  color: var(--secondary-color);
+  padding: 0 30px;
+  border-bottom: 3px solid #91140f;
 }
 
-/* El contenido del hero entra con la animación de póster cinematográfico */
 .hero-content {
-    animation: fadeSlideUp 1s ease-out both;
+  animation: fadeSlideUp 1s ease-out both;          /* todo el bloque entra junto */
 }
 
-/* El subtítulo y el botón entran con un pequeño delay para efecto escalonado */
 .hero-subtitle {
-    animation: fadeSlideUp 1s ease-out 0.3s both;
+  animation: fadeSlideUp 1s ease-out 0.3s both;     /* 0.3s de delay — aparece después del contenido */
+}
+
+.hero-img {
+  margin-top: -25px;
+  height: 200px;
+  transition: 0.5s;
+}
+
+.hero-img:hover {
+  transform: scale(1.1);
+}
+
+.hero-content h1 {
+  font-size: 3.4rem;
+  margin-bottom: 25px;
+}
+
+.hero-content h1 span {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 1.7rem;
+  max-width: 600px;
+  margin: 0;
 }
 
 .hero-button {
-    animation: fadeSlideUp 1s ease-out 0.6s both;
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  padding: 15px 40px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s;
+  margin-top: 40px;
+  animation: fadeSlideUp 1s ease-out 0.6s both;     /* 0.6s de delay — último en aparecer */
 }
 
-.hero-img{
-    margin-top: -25px;
-    height: 200px;
-    transition: 0.5s;
+.hero-button:hover {
+  transform: translateY(-4px);                       /* sube el botón al hacer hover */
+  box-shadow: 0 8px 20px rgba(145, 20, 15, 0.5);
 }
 
-.hero-img:hover{
-    transform: scale(1.1);
+
+/* ─── BUSCADOR ───────────────────────────────────────────────────────────────
+   Caja de búsqueda centrada con imagen de fondo semitransparente.
+   El input usa la misma fuente del sitio para consistencia visual.
+   .no-results se muestra/oculta con la clase .show que maneja el JS. */
+
+.search-section {
+  padding: 80px 10%;
+  text-align: center;
+  position: relative;
+  z-index: 3;                                        /* encima de las cortinas decorativas */
 }
 
-.hero-content h1{
-    font-size: 3.4rem;
-    margin-bottom: 25px;
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+              url(../assets/images/tarjetas-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-.hero-content h1 span{
-    color: var(--accent-color);
-    font-weight: bold;
+.search-container h2 {
+  margin-bottom: 10px;
+  color: var(--accent-color);
 }
 
-.hero-content p{
-    font-size: 1.7rem;
-    max-width: 600px;
-    margin: 0;
-    justify-content: center;
+.search-container p {
+  margin-bottom: 20px;
+  color: black;
+  font-size: 20px;
 }
 
-.hero-button{
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
-    padding: 15px 40px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.3s;
-    margin-top: 40px;
+.search-container input {
+  padding: 14px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  outline: none;
+  font-size: 20px;
+  transition: 0.2s;
+  font-family: "Girassol", serif;                    /* mantiene la tipografía del sitio */
 }
 
-.hero-button:hover{
-    transform: translateY(10px);
-}
-/* HERO FINAL */
-
-/* CATALOGO INICIO */
-/* BUSCADOR INICIO */
-.search-section{
-    padding: 80px 10%;
-    text-align: center;
-    position: relative;
-    z-index: 3;
-}
-
-.search-container{
-    max-width: 600px;
-    margin: 0 auto;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../assets/images/tarjetas-bg.jpg);
-    background-size: cover;
-    background-position: center;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    
-}
-
-.search-container h2{
-    margin-bottom: 10px;
-    color: var(--accent-color);
-}
-
-.search-container p{
-    margin-bottom: 20px;
-    color: black;
-    font-size: 20px;
-}
-
-.search-container input{
-    padding: 14px;
-    width: 100%;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    outline: none;
-    font-size: 20px;
-    transition: 0.2s;
-    font-family: "Girassol", serif;
-}
-
-.search-container input:focus{
-    border-color: var(--accent-color);
-    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+.search-container input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
 }
 
 .no-results {
-    display: none;
-    color: var(--bg-color);
-    font-size: 18px;
-    margin-top: 40px;
-    text-align: center;
+  display: none;                                     /* oculto por defecto */
+  color: var(--bg-color);
+  font-size: 18px;
+  margin-top: 40px;
+  text-align: center;
 }
 
 .no-results.show {
-    display: block;
-}
-/* BUSCADOR FINAL */
-
-
-.catalog-container{
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.7)), url(../assets/images/patron-cortinas.jpg);
-    background-size: cover;
-    background-position: center;
-    border-bottom: 5px solid #a3792b;
-}
-.catalog-container h2{
-    text-align: center;
-    font-weight: 600;
+  display: block;                                    /* el JS agrega esta clase cuando no hay resultados */
 }
 
-.catalog-section{
-    position: relative;
-    padding: 120px 10% 80px; 
-    overflow: hidden;
+
+/* ─── CATÁLOGO Y GRID DE PELÍCULAS ───────────────────────────────────────────
+   catalog-container aplica el fondo de cortinas como contexto visual del cine.
+   Las cortinas decorativas se crean con ::before y ::after sin HTML extra.
+   El grid usa 3 columnas en desktop y colapsa a 1 en móvil via media query. */
+
+.catalog-container {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+              url(../assets/images/patron-cortinas.jpg);
+  background-size: cover;
+  background-position: center;
+  border-bottom: 5px solid #a3792b;
 }
 
-.catalog-section::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1000px;
-    height: 1000px;
-    background: url(../assets/images/cortina-lados.png) no-repeat;
-    background-size: contain;
-    z-index: 2;
+.catalog-container h2 {
+  text-align: center;
+  font-weight: 600;
 }
 
-.catalog-section::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1000px;
-    height: 1000px;
-    background: url(../assets/images/cortina-lados.png) no-repeat;
-    background-size: contain;
-    transform: scaleX(-1);
-    z-index: 2;
+.catalog-section {
+  position: relative;
+  padding: 120px 10% 80px;
+  overflow: hidden;
 }
 
-.catalog-section::before, .catalog-section::after{
-    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
+.catalog-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 1000px;
+  background: url(../assets/images/cortina-lados.png) no-repeat;
+  background-size: contain;
+  z-index: 2;                                        /* encima del fondo, debajo del contenido */
 }
 
-/* GRID DE LAS PELICULAS */
-.movies-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 30px;
+.catalog-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1000px;
+  height: 1000px;
+  background: url(../assets/images/cortina-lados.png) no-repeat;
+  background-size: contain;
+  transform: scaleX(-1);                             /* espeja la imagen para la cortina derecha */
+  z-index: 2;
 }
 
-.movie-card{
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(../assets/images/tarjetas-bg.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 30px;
-    font-size: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    border-radius: 14px;
-    text-align: center;
-    /* transition cubre tanto el hover como el fade del buscador */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    color: black;
+.catalog-section::before,
+.catalog-section::after {
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
 }
 
-/* Clase que aplica el JS cuando la card no coincide con la búsqueda */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);             /* 3 columnas iguales en desktop */
+  gap: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.movie-card {
+  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+              url(../assets/images/tarjetas-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 30px;
+  font-size: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  border-radius: 14px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; /* cubre hover y fade del buscador */
+  color: black;
+}
+
 .movie-card.hidden {
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    visibility: hidden;
+  opacity: 0;                                        /* el JS agrega esta clase al filtrar */
+  pointer-events: none;                              /* desactiva clicks mientras está oculta */
+  position: absolute;
+  visibility: hidden;
 }
 
-.movie-card:hover{
-    /* translateY negativo: la tarjeta sube (efecto de elevación, no de caída) */
-    transform: translateY(-8px);
-    cursor: pointer;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+.movie-card:hover {
+  transform: translateY(-8px);                       /* sube la tarjeta — efecto de elevación */
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.8);          /* sombra más pronunciada al elevar */
 }
 
-.movie-card h3{
-    margin-bottom: 10px;
-    color: var(--accent-color);
+.movie-card h3 {
+  margin-bottom: 10px;
+  color: var(--accent-color);
 }
 
-.card-image{
-    margin-bottom: 15px;
-    margin-top: 15px;
-    width: 70%;
-    height: 300px;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    align-items: center;
-}
-/* GRID DE LAS PELICULAS */
-/* CATALOGO FINAL */
-
-/* FORMULARIO DE TICKETS INICIO */
-.tickets-section{
-    padding: 100px 10%;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(../assets/images/fondo-patron-decorativo.png);;
+.card-image {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  width: 70%;
+  height: 300px;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-.tickets-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+
+/* ─── FORMULARIO DE TICKETS ──────────────────────────────────────────────────
+   Layout de dos columnas: izquierda con info y imagen flotante, derecha con el form.
+   La imagen de tickets tiene animación infinita de flotado para dar dinamismo.
+   El popup de confirmación se posiciona fixed para cubrir toda la pantalla. */
+
+.tickets-section {
+  padding: 100px 10%;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+              url(../assets/images/fondo-patron-decorativo.png);
 }
 
-.tickets-info{
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(../assets/images/tarjetas-bg.jpg);
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.tickets-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;                   /* dos columnas iguales */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
 }
 
-.tickets-info h2{
-    font-size: 40px;
-    margin-bottom: 10px;
+.tickets-info {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+              url(../assets/images/tarjetas-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.tickets-info p{
-    opacity: 0.9;
-    margin-bottom: 15px;
-    font-size: 22px;
+.tickets-info h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
 }
 
-.tickets-img{
-    width: 440px;
-    margin-top: 20px;
-    animation: animacion-flotar 3s ease-in-out infinite;
+.tickets-info p {
+  opacity: 0.9;
+  margin-bottom: 15px;
+  font-size: 22px;
 }
 
-@keyframes animacion-flotar{
-    0% {transform: translateY(0px);}
-    50% {transform: translateY(-30px);}
-    100% {transform: translateY(0px);}
+@keyframes animacion-flotar {
+  0%   { transform: translateY(0px);   }
+  50%  { transform: translateY(-30px); }    /* sube 30px en el punto medio */
+  100% { transform: translateY(0px);   }
 }
 
-.tickets-form-box{
-    background: #f5ebd2;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.tickets-img {
+  width: 440px;
+  margin-top: 20px;
+  animation: animacion-flotar 3s ease-in-out infinite; /* ease-in-out da movimiento orgánico */
 }
 
-.tickets-form-box h2{
-    margin-bottom: 25px;
-    color: #5a2a1a;
+.tickets-form-box {
+  background: #f5ebd2;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.tickets-form{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.tickets-form-box h2 {
+  margin-bottom: 25px;
+  color: #5a2a1a;
 }
 
-.form-group{
-    display: flex;
-    flex-direction: column;
+.tickets-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.form-group label{
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: #3d2b1f;
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
-.form-group input, .form-group select{
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 18px;
-    transition: 0.2s;
-    font-family: "Girassol", serif;
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #3d2b1f;
 }
 
-.form-group input:focus, .form-group select:focus{
-    border-color: var(--accent-color);
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 18px;
+  transition: 0.2s;
+  font-family: "Girassol", serif;                    /* mantiene la tipografía del sitio */
 }
 
-.apartar-btn{
-    margin-top: 10px;
-    padding: 12px;
-    width: 50%;
-    align-self: center;
-    border: none;
-    border-radius: 10px;
-    background: var(--accent-color);
-    color: #fff;
-    font-family: "Girassol", serif;
-    font-size: large;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
-.apartar-btn:hover{
-    transform: translateY(-2px);
-    opacity: 0.9;
+.apartar-btn {
+  margin-top: 10px;
+  padding: 12px;
+  width: 50%;
+  align-self: center;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent-color);
+  color: #fff;
+  font-family: "Girassol", serif;
+  font-size: large;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* POPUP ALERTAS INICIO */
+.apartar-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+
+/* ─── POPUP DE ALERTAS ───────────────────────────────────────────────────────
+   Ventana modal que cubre toda la pantalla con fondo semitransparente.
+   El JS la activa cambiando display de none a flex para centrar el contenido.
+   popupAparecer anima la entrada con escala para suavizar la aparición. */
+
 .popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  display: none;                                     /* oculto por defecto, el JS lo activa */
+  position: fixed;                                   /* cubre toda la pantalla sin importar el scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);                       /* fondo oscuro semitransparente */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;                                     /* encima de absolutamente todo */
 }
 
 .popup-content {
-    background: linear-gradient(135deg, #f5ebd2 0%, #e8dcc4 100%);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-    text-align: center;
-    max-width: 400px;
-    animation: popupAparecer 0.3s ease-out;
+  background: linear-gradient(135deg, #f5ebd2 0%, #e8dcc4 100%);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  text-align: center;
+  max-width: 400px;
+  animation: popupAparecer 0.3s ease-out;
 }
 
 @keyframes popupAparecer {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.9);                           /* empieza un poco más pequeño */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .popup-content p {
-    color: var(--text-color);
-    font-size: 20px;
-    margin-bottom: 25px;
-    line-height: 1.6;
+  color: var(--text-color);
+  font-size: 20px;
+  margin-bottom: 25px;
+  line-height: 1.6;
 }
 
 .popup-content button {
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: "Girassol", serif;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Girassol", serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .popup-content button:hover {
-    background: #b81a14;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(145, 20, 15, 0.4);
+  background: #b81a14;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(145, 20, 15, 0.4);
 }
 
 #closePopup {
-    width: 100%;
-    max-width: 200px;
-}
-/* POPUP ALERTAS FINAL */
-
-.footer{
-    text-align: center;
-    background: black;
-    padding: 20px 40px;
-    color: #888;
-    font-size: 13px;
+  width: 100%;
+  max-width: 200px;
 }
 
-/* Links de contacto en el footer: pequeños, discretos, estilo cine */
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────────
+   Franja negra al fondo con el copyright y links de contacto discretos.
+   Los links usan color gris y sin subrayado para no competir visualmente.
+   Al hover se iluminan al crema del tema para mantener coherencia. */
+
+.footer {
+  text-align: center;
+  background: black;
+  padding: 20px 40px;
+  color: #888;
+  font-size: 13px;
+}
+
 .footer-links {
-    margin-top: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;                                   /* en móvil los links se apilan en varias filas */
+  gap: 6px;
 }
 
 .footer-links a {
-    color: #888;
-    text-decoration: none;
-    font-size: 12px;
-    transition: color 0.3s;
+  color: #888;
+  text-decoration: none;                             /* sin subrayado para estilo discreto */
+  font-size: 12px;
+  transition: color 0.3s;
 }
 
 .footer-links a:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);                     /* crema dorado al hover */
 }
 
 .footer-sep {
-    color: #555;
-    font-size: 12px;
-}
-
-/* RESPONSIVE */
-/* TABLETS  */
-@media (max-width: 992px){
-
-    /* NAVBAR */
-    .nav-links{
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: var(--secondary-color);
-        flex-direction: column;
-        width: 250px;
-        padding: 20px;
-        gap: 15px;
-        display: none;
-    }
-
-    .nav-links.active{
-        display: flex;
-    }
-
-    .menu-toggle{
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        gap: 5px;
-    }
-
-    .menu-toggle span{
-        width: 25px;
-        height: 3px;
-        background: var(--primary-color);
-    }
-
-    /* HERO */
-    .hero{
-        height: auto;
-        padding: 80px 20px;
-    }
-
-    .hero-content p{
-        font-size: 1.3rem;
-    }
-
-    .hero-img{
-        height: 150px;
-    }
-
-    /* GRID PELICULAS */
-    .movies-grid{
-        grid-template-columns: 1fr;
-        padding: 10px;
-    }
-
-    /* CORTINAS */
-    .catalog-section::before, .catalog-section::after{
-        width: 400px;
-        height: 600px;
-    }
-
-    /* FORMULARIO */
-    .tickets-container{
-        grid-template-columns: 1fr;
-    }
-
-    .tickets-info{
-        text-align: center;
-    }
-
-    .tickets-img{
-        width: 250px;
-    }
-
-    .apartar-btn{
-        width: 70%;
-    }
+  color: #555;
+  font-size: 12px;                                   /* punto separador entre links */
 }
 
 
-/* CELULARES */
-@media (max-width: 600px){
+/* ─── RESPONSIVE — TABLETS (max 992px) ──────────────────────────────────────
+   Activa el menú hamburguesa ocultando nav-links y mostrando menu-toggle.
+   El grid de películas colapsa a una columna para mejor lectura en pantalla chica.
+   El formulario de tickets pasa de dos columnas a una sola apilada. */
 
-    /* NAVBAR */
-    .navbar{
-        padding: 20px;
-    }
+@media (max-width: 992px) {
 
-    .logo{
-        font-size: 22px;
-    }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--secondary-color);
+    flex-direction: column;
+    width: 250px;
+    padding: 20px;
+    gap: 15px;
+    display: none;                                   /* oculto hasta que JS agrega .active */
+  }
 
-    .navbar-logo{
-        max-width: 60px;
-    }
+  .nav-links.active {
+    display: flex;                                   /* visible cuando el hamburguesa está activo */
+  }
 
-    /* HERO */
-    .hero-content p{
-        font-size: 1.1rem;
-    }
+  .menu-toggle {
+    display: flex;                                   /* aparece el ícono hamburguesa */
+  }
 
-    .hero-button{
-        padding: 12px 25px;
-    }
+  .hero {
+    height: auto;
+    padding: 80px 20px;
+  }
 
-    /* BUSCADOR */
-    .search-container{
-        padding: 25px;
-    }
+  .hero-content p {
+    font-size: 1.3rem;
+  }
 
-    .search-container h2{
-        font-size: 20px;
-    }
+  .hero-img {
+    height: 150px;
+  }
 
-    .search-container input{
-        font-size: 16px;
-    }
+  .movies-grid {
+    grid-template-columns: 1fr;                      /* una sola columna en tablet */
+    padding: 10px;
+  }
 
-    /* GRID*/
-    .movies-grid{
-        margin-top: 20px;
-        grid-template-columns: 1fr;
-        padding: 1px;
-        gap: 25px;
-    }
+  .catalog-section::before,
+  .catalog-section::after {
+    width: 400px;
+    height: 600px;                                   /* cortinas más pequeñas en tablet */
+  }
 
-    .movie-card{
-        max-width: 500px;
-        width: 90%;
-        margin: 0 auto;
-        padding: 30px;
-        font-size: 15px;
-    }
+  .tickets-container {
+    grid-template-columns: 1fr;                      /* info y form apilados verticalmente */
+  }
 
-    .card-image{
-        width: 100%;
-        height: auto;
-        max-height: 280px;
-        object-fit: cover;
-    }
+  .tickets-info {
+    text-align: center;
+  }
 
-    .catalog-section::before, .catalog-section::after{
-        width: 200px;
-        height: 200px;
-    }
+  .tickets-img {
+    width: 250px;
+  }
 
-    /* FORMULARIO */
-    .tickets-form-box{
-        padding: 30px;
-    }
+  .apartar-btn {
+    width: 70%;
+  }
+}
 
-    .tickets-info{
-        padding: 40px 20px;
-    }
 
-    .tickets-info h2{
-        font-size: 28px;
-    }
+/* ─── RESPONSIVE — CELULARES (max 600px) ────────────────────────────────────
+   Ajusta tamaños de fuente, padding y espaciado para pantallas muy pequeñas.
+   Las imágenes de las tarjetas pasan a ancho completo con altura automática.
+   El botón de reservar ocupa todo el ancho para facilitar el toque en móvil. */
 
-    .tickets-info p{
-        font-size: 18px;
-    }
+@media (max-width: 600px) {
 
-    .tickets-img{
-        width: 180px;
-    }
+  .navbar {
+    padding: 20px;
+  }
 
-    .apartar-btn{
-        width: 100%;
-    }
+  .logo {
+    font-size: 22px;
+  }
 
-    /* FOOTER */
-    .footer{
-        font-size: 14px;
-        padding: 15px;
-    }
+  .navbar-logo {
+    max-width: 60px;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .hero-button {
+    padding: 12px 25px;
+  }
+
+  .search-container {
+    padding: 25px;
+  }
+
+  .search-container h2 {
+    font-size: 20px;
+  }
+
+  .search-container input {
+    font-size: 16px;
+  }
+
+  .movies-grid {
+    margin-top: 20px;
+    grid-template-columns: 1fr;
+    padding: 1px;
+    gap: 25px;
+  }
+
+  .movie-card {
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 15px;
+  }
+
+  .card-image {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: cover;                               /* recorta sin deformar la imagen */
+  }
+
+  .catalog-section::before,
+  .catalog-section::after {
+    width: 200px;
+    height: 200px;                                   /* cortinas mínimas en celular */
+  }
+
+  .tickets-form-box {
+    padding: 30px;
+  }
+
+  .tickets-info {
+    padding: 40px 20px;
+  }
+
+  .tickets-info h2 {
+    font-size: 28px;
+  }
+
+  .tickets-info p {
+    font-size: 18px;
+  }
+
+  .tickets-img {
+    width: 180px;
+  }
+
+  .apartar-btn {
+    width: 100%;                                     /* ancho completo para facilitar el toque */
+  }
+
+  .footer {
+    font-size: 14px;
+    padding: 15px;
+  }
 }
